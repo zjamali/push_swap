@@ -6,12 +6,12 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 20:21:59 by zjamali           #+#    #+#             */
-/*   Updated: 2021/06/17 15:28:47 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/06/17 18:45:11 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
+
 
 void	ft_init_stacks(t_stack *stacks)
 {
@@ -35,13 +35,26 @@ char	**parse_arguments(char **av, int ac)
 		line = ft_strjoin(line, av[i]);
 		free(tmp);
 		tmp = line;
-		line = ft_strjoin(line," ");
+		line = ft_strjoin(line, " ");
 		free(tmp);
 		i++;
 	}
-	data = ft_split(line,' ');
+	data = ft_split(line, ' ');
 	free(line);
 	return (data);
+}
+
+void	ft_free_data(char **data)
+{
+	int	i;
+
+	i = 0;
+	while (data[i])
+	{
+		free(data[i]);
+		i++;
+	}
+	free(data);
 }
 
 int	main(int ac, char **av)
@@ -50,10 +63,12 @@ int	main(int ac, char **av)
 //	t_stack	stacks;
 	//ft_init_stacks(&stacks);
 	data = parse_arguments(av, ac);
-	for (int i = 0 ;  data[i] != NULL ; i++)
+	if (ft_check_data(data))
 	{
-		ft_putstr_fd(data[i],1);
-		ft_putstr_fd("\n",1);
+		for (int i = 0; data[i] ; i++)
+			printf("%d ",ft_atoi(data[i]));
+		//ft_push_swap(data);
 	}
+	ft_free_data(data);
 	return (0);
 }
