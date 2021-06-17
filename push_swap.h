@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 20:28:50 by zjamali           #+#    #+#             */
-/*   Updated: 2021/06/17 18:45:16 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/06/17 19:01:06 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@
 
 typedef struct s_stacks
 {
-	t_vector	a;
-	t_vector	b;
+	t_vector	stack;
 }				t_stack;
 
 int	ft_check_data(char **data);
