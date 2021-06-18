@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 20:54:19 by zjamali           #+#    #+#             */
-/*   Updated: 2021/06/18 16:59:06 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/06/18 18:41:20 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	push_swap(char **data)
 	ft_push_to_data_stack(&stack_b, data);
 	if (ft_check_data_is_sorted(stack_a))
 	{
-		
 		for (int i = 0; i < stack_a.used; i++)
 		{
 			printf("a[%d] = %d\n", i, *(int *)stack_a.vector_get(&stack_a,i));
@@ -67,7 +66,7 @@ void	push_swap(char **data)
 			printf("b[%d] = %d\n", i, *(int *)stack_a.vector_get(&stack_b,i));
 		}
 		printf("\n\n\n");
-		ft_reverse_rotate(&stack_b);
+		ft_rotate_both_stacks(&stack_a, &stack_b);
 		for (int i = 0; i < stack_a.used; i++)
 		{
 			printf("a[%d] = %d\n", i, *(int *)stack_a.vector_get(&stack_a,i));

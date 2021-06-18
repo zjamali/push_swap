@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 14:02:58 by zjamali           #+#    #+#             */
-/*   Updated: 2021/06/18 16:58:24 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/06/18 18:30:52 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,10 @@ void	ft_rotate(t_vector *stack)
 	}
 }
 
+
+/*
+*	ft_reverse_rotate : shift down all elements of stack by 1
+*/
 void	ft_reverse_rotate(t_vector *stack)
 {
 	int	tmp;
