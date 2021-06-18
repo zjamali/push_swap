@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 20:54:19 by zjamali           #+#    #+#             */
-/*   Updated: 2021/06/17 20:58:13 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/06/18 16:59:06 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,35 @@ int	ft_check_data_is_sorted(t_vector stack)
 void	push_swap(char **data)
 {
 	t_vector	stack_a;
+	t_vector	stack_b;
 
-	ft_vector_init(&stack_a,sizeof(int));
+	ft_vector_init(&stack_a, sizeof(int));
+	ft_vector_init(&stack_b, sizeof(int));
 	ft_push_to_data_stack(&stack_a, data);
+	ft_push_to_data_stack(&stack_b, data);
 	if (ft_check_data_is_sorted(stack_a))
-		ft_putstr_fd("not sorted\n",1);
+	{
+		
+		for (int i = 0; i < stack_a.used; i++)
+		{
+			printf("a[%d] = %d\n", i, *(int *)stack_a.vector_get(&stack_a,i));
+		}
+		printf("\n");
+		for (int i = 0; i < stack_b.used; i++)
+		{
+			printf("b[%d] = %d\n", i, *(int *)stack_a.vector_get(&stack_b,i));
+		}
+		printf("\n\n\n");
+		ft_reverse_rotate(&stack_b);
+		for (int i = 0; i < stack_a.used; i++)
+		{
+			printf("a[%d] = %d\n", i, *(int *)stack_a.vector_get(&stack_a,i));
+		}
+		printf("\n");
+		for (int i = 0; i < stack_b.used; i++)
+		{
+			printf("b[%d] = %d\n", i, *(int *)stack_a.vector_get(&stack_b,i));
+		}
+	}
 	stack_a.vector_free(&stack_a);
 }
