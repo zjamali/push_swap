@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 18:08:16 by zjamali           #+#    #+#             */
-/*   Updated: 2021/06/17 18:58:24 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/06/22 21:42:25 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ static void	ft_check_duplicated(char **data)
 		i++;
 	}
 }
+
 static int	ft_check_errors(char *data)
 {
 	int	i;

@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 20:54:19 by zjamali           #+#    #+#             */
-/*   Updated: 2021/06/18 18:41:20 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/06/23 14:02:35 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,37 @@ int	ft_check_data_is_sorted(t_vector stack)
 	return (0);
 }
 
+void	ft_get_max_and_min(int *items, int len, int *min, int *max)
+{
+	int	i;
+
+	i = 0;
+	*max = INT_MIN;
+	*min = INT_MAX;
+	while (i < len)
+	{
+		if (*(items + i) < *min)
+			*min = *(items + i);
+		if (*(items + i) >  *max)
+			*max = *(items + i);
+		i++;
+	}
+}
+
+void	finding_the_median(t_vector *stack)
+{
+	int	min;
+	int	max;
+	static int	begin_end[2];
+
+	min = INT_MAX;
+	max = INT_MIN;
+	begin_end[0] = 0;
+	begin_end[1] = stack->used - 1;
+	ft_get_max_and_min(stack->items,stack->used, &min, &max);
+	printf("min = %d \t max = %d\n", min, max);
+}
+
 void	push_swap(char **data)
 {
 	t_vector	stack_a;
@@ -77,5 +108,6 @@ void	push_swap(char **data)
 			printf("b[%d] = %d\n", i, *(int *)stack_a.vector_get(&stack_b,i));
 		}
 	}
+	finding_the_median(&stack_a);
 	stack_a.vector_free(&stack_a);
 }
