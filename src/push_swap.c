@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 20:54:19 by zjamali           #+#    #+#             */
-/*   Updated: 2021/06/23 14:02:35 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/06/23 18:07:11 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,78 @@ void	ft_get_max_and_min(int *items, int len, int *min, int *max)
 	}
 }
 
+int	*count_lower_upper(int *items, double median, int len)
+{
+	int	i;
+	int	*lower_upper;
+
+	lower_upper = (int *)malloc(sizeof(int) * 2);
+	lower_upper[0] = 0;
+	lower_upper[1] = 0;
+	i = 0;
+	while (i < len)
+	{
+		if (median > *(items + i))
+			lower_upper[0] = lower_upper[0] + 1;
+		if (median < *(items + i))
+			lower_upper[1] = lower_upper[1] + 1;
+		i++;
+	}
+	return (lower_upper);
+}
+
+double	get_the_median(int *items, int index, t_medain mid)
+{
+	double	median;
+	int		*lower_upper;
+
+	while (index < mid.array_leng)
+	{
+		median = *(items + index);
+		if (median < mid.max && median > mid.min)
+		{
+			lower_upper = count_lower_upper(items, median, mid.array_leng);
+			if (lower_upper[0] == lower_upper[1])
+				return (median);
+			else
+			{
+				if (lower_upper[0] > lower_upper[1])
+				{
+					mid.max = median;
+					return (get_the_median(items, index + 1, mid));
+				}
+				else
+				{
+					mid.min = median;
+					return (get_the_median(items, index + 1, mid));
+				}
+			}
+		}
+		else
+			index++;
+		if (mid.array_leng % 2 == 0)
+			median = (mid.min + mid.max) / 2;
+	}
+	return (median);
+}
+
 void	finding_the_median(t_vector *stack)
 {
-	int	min;
-	int	max;
-	static int	begin_end[2];
+	t_medain	median;
+	int			max;
+	int			min;
 
 	min = INT_MAX;
 	max = INT_MIN;
-	begin_end[0] = 0;
-	begin_end[1] = stack->used - 1;
-	ft_get_max_and_min(stack->items,stack->used, &min, &max);
-	printf("min = %d \t max = %d\n", min, max);
+	ft_get_max_and_min(stack->items, stack->used, &min, &max);
+	printf("min = %d \t max = %d\t", min, max);
+	median.array_leng = stack->used;
+	printf("used = %d\n\n",stack->used);
+	median.items = stack->items;
+	median.min = min + 0.0;
+	median.max = max + 0.0;
+	median.median = get_the_median(stack->items, 0, median);
+	printf(" the median = %f\n",median.median);
 }
 
 void	push_swap(char **data)
@@ -89,24 +149,9 @@ void	push_swap(char **data)
 	{
 		for (int i = 0; i < stack_a.used; i++)
 		{
-			printf("a[%d] = %d\n", i, *(int *)stack_a.vector_get(&stack_a,i));
+			printf("%d ",*(int *)stack_a.vector_get(&stack_a,i));
 		}
 		printf("\n");
-		for (int i = 0; i < stack_b.used; i++)
-		{
-			printf("b[%d] = %d\n", i, *(int *)stack_a.vector_get(&stack_b,i));
-		}
-		printf("\n\n\n");
-		ft_rotate_both_stacks(&stack_a, &stack_b);
-		for (int i = 0; i < stack_a.used; i++)
-		{
-			printf("a[%d] = %d\n", i, *(int *)stack_a.vector_get(&stack_a,i));
-		}
-		printf("\n");
-		for (int i = 0; i < stack_b.used; i++)
-		{
-			printf("b[%d] = %d\n", i, *(int *)stack_a.vector_get(&stack_b,i));
-		}
 	}
 	finding_the_median(&stack_a);
 	stack_a.vector_free(&stack_a);

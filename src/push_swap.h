@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 20:28:50 by zjamali           #+#    #+#             */
-/*   Updated: 2021/06/23 13:57:19 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/06/23 16:58:05 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,15 @@
 # include <limits.h>
 
 # include <stdio.h>
+
+typedef struct s_median
+{
+	double	max;
+	double	min;
+	double	median;
+	int	*items;
+	int	array_leng;
+}				t_medain;
 
 int		ft_check_data(char **data);
 void	push_swap(char **data);
