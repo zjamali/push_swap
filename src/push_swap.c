@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 20:54:19 by zjamali           #+#    #+#             */
-/*   Updated: 2021/06/23 18:35:14 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/06/23 18:56:16 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	push_swap(char **data)
 	{
 		for (int i = 0; i < stack_a.used; i++)
 		{
-			printf("%d ",*(int *)stack_a.vector_get(&stack_a,i));
+			printf("%d ",*(int *)stack_a.vector_get(&stack_a, i));
 		}
 		printf("\n");
 		printf("the median = %f \n", finding_the_median(&stack_a));
