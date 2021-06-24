@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 18:26:04 by zjamali           #+#    #+#             */
-/*   Updated: 2021/06/24 16:35:57 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/06/24 16:41:12 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,30 +29,19 @@ void	ft_get_max_and_min(int *items, int len, int *min, int *max)
 	}
 }
 
-void	count_uppers(int *items, int curr_num, int len, int *uppers)
+void	count_lower_upper(int *items, double median, int len, int *lower_upper)
 {
 	int	i;
 
+	lower_upper[0] = 0;
+	lower_upper[1] = 0;
 	i = 0;
-	*uppers = 0;
 	while (i < len)
 	{
-		if (curr_num < items[i])
-			*uppers = *uppers + 1;
-		i++;
-	}
-}
-
-void	count_lowers(int *items, int curr_num, int len, int *lowes)
-{
-	int	i;
-
-	i = 0;
-	*lowes = 0;
-	while (i < len)
-	{
-		if (curr_num > items[i])
-			*lowes = *lowes + 1;
+		if (median > *(items + i))
+			lower_upper[0] = lower_upper[0] + 1;
+		if (median < *(items + i))
+			lower_upper[1] = lower_upper[1] + 1;
 		i++;
 	}
 }
@@ -79,8 +68,7 @@ double	get_the_median(int *items, int array_length, int min, int max)
 		curr_num = items[index];
 		if (curr_num > min && curr_num < max)
 		{
-			count_lowers(items, curr_num, array_length, &lower_upper[0]);
-			count_uppers(items, curr_num, array_length, &lower_upper[1]);
+			count_lower_upper(items, curr_num, array_length, lower_upper);
 			if (lower_upper[0] == lower_upper[1])
 				return (curr_num);
 			else
