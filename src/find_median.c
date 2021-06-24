@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 18:26:04 by zjamali           #+#    #+#             */
-/*   Updated: 2021/06/24 16:41:12 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/06/24 18:22:02 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void	ft_get_max_and_min(int *items, int len, int *min, int *max)
 	*min = INT_MAX;
 	while (i < len)
 	{
-		if (*(items + i) < *min)
-			*min = *(items + i);
-		if (*(items + i) > *max)
-			*max = *(items + i);
+		if (items[i] < *min)
+			*min = items[i];
+		if (items[i] > *max)
+			*max = items[i];
 		i++;
 	}
 }
@@ -38,9 +38,9 @@ void	count_lower_upper(int *items, double median, int len, int *lower_upper)
 	i = 0;
 	while (i < len)
 	{
-		if (median > *(items + i))
+		if (median > items[i])
 			lower_upper[0] = lower_upper[0] + 1;
-		if (median < *(items + i))
+		if (median < items[i])
 			lower_upper[1] = lower_upper[1] + 1;
 		i++;
 	}

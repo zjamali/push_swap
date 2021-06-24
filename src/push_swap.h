@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 20:28:50 by zjamali           #+#    #+#             */
-/*   Updated: 2021/06/24 15:42:53 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/06/24 20:06:58 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,16 @@ typedef struct s_median
 	int		*items;
 	int		array_leng;
 }				t_medain;
+
+typedef struct s_is_sorted
+{
+	int	i;
+	int	items_compared;
+	int	is_sorted;
+	int	prev_num;
+	int	curr_num;
+}				t_is_sorted;
+
 
 int		ft_check_data(char **data);
 void	push_swap(char **data);
