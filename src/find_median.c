@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 18:26:04 by zjamali           #+#    #+#             */
-/*   Updated: 2021/06/23 18:33:29 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/06/24 16:35:57 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,66 +29,67 @@ void	ft_get_max_and_min(int *items, int len, int *min, int *max)
 	}
 }
 
-int	*count_lower_upper(int *items, double median, int len)
+void	count_uppers(int *items, int curr_num, int len, int *uppers)
 {
 	int	i;
-	int	*lower_upper;
 
-	lower_upper = (int *)malloc(sizeof(int) * 2);
-	lower_upper[0] = 0;
-	lower_upper[1] = 0;
 	i = 0;
+	*uppers = 0;
 	while (i < len)
 	{
-		if (median > *(items + i))
-			lower_upper[0] = lower_upper[0] + 1;
-		if (median < *(items + i))
-			lower_upper[1] = lower_upper[1] + 1;
+		if (curr_num < items[i])
+			*uppers = *uppers + 1;
 		i++;
 	}
-	return (lower_upper);
 }
 
-double	recur_get_the_medina(int *items, int index, t_medain mid,
-	int *lower_upper)
+void	count_lowers(int *items, int curr_num, int len, int *lowes)
+{
+	int	i;
+
+	i = 0;
+	*lowes = 0;
+	while (i < len)
+	{
+		if (curr_num > items[i])
+			*lowes = *lowes + 1;
+		i++;
+	}
+}
+
+void	new_min_max(int curr_num, int *min, int *max, int *lower_upper)
 {
 	if (lower_upper[0] > lower_upper[1])
-	{
-		mid.max = mid.median;
-		return (get_the_median(items, index + 1, mid));
-	}
+		*max = curr_num;
 	else
-	{
-		mid.min = mid.median;
-		return (get_the_median(items, index + 1, mid));
-	}
-	return (mid.median);
+		*min = curr_num;
 }
 
-double	get_the_median(int *items, int index, t_medain mid)
+double	get_the_median(int *items, int array_length, int min, int max)
 {
-	double	median;
-	int		*lower_upper;
+	int			index;
+	float		median;
+	int			curr_num;
+	static int	lower_upper[2];
 
-	while (index < mid.array_leng)
+	median = 0.0;
+	index = 0;
+	while (index < array_length)
 	{
-		median = *(items + index);
-		if (median < mid.max && median > mid.min)
+		curr_num = items[index];
+		if (curr_num > min && curr_num < max)
 		{
-			lower_upper = count_lower_upper(items, median, mid.array_leng);
+			count_lowers(items, curr_num, array_length, &lower_upper[0]);
+			count_uppers(items, curr_num, array_length, &lower_upper[1]);
 			if (lower_upper[0] == lower_upper[1])
-				return (median);
+				return (curr_num);
 			else
-			{
-				mid.median = median;
-				return (recur_get_the_medina(items, index, mid, lower_upper));
-			}
+				new_min_max(curr_num, &min, &max, lower_upper);
 		}
-		else
-			index++;
-		if (mid.array_leng % 2 == 0)
-			median = (mid.min + mid.max) / 2;
+		index++;
 	}
+	if (array_length % 2 == 0)
+		median = (min + max) / 2.0;
 	return (median);
 }
 
@@ -101,10 +102,11 @@ double 	finding_the_median(t_vector *stack)
 	min = INT_MAX;
 	max = INT_MIN;
 	ft_get_max_and_min(stack->items, stack->used, &min, &max);
+	printf("min:%d \t max:%d\n", min, max);
 	median.array_leng = stack->used;
 	median.items = stack->items;
 	median.min = min + 0.0;
 	median.max = max + 0.0;
-	median.median = get_the_median(stack->items, 0, median);
+	median.median = get_the_median(stack->items, stack->used, min, max);
 	return (median.median);
 }

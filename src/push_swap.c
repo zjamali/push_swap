@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 20:54:19 by zjamali           #+#    #+#             */
-/*   Updated: 2021/06/23 18:56:16 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/06/24 14:27:11 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,48 @@ int	ft_check_data_is_sorted(t_vector stack)
 	return (0);
 }
 
+int	ft_push_median_lowests(t_vector *stack_a, t_vector *stack_b,
+		double median)
+{
+	int	i;
+
+	i = 0;
+	int	half_stack;
+	half_stack = 0;
+	half_stack = stack_a->used / 2;
+	while (i < stack_a->used - 1)
+	{
+		//if (stack_a->used > 1 && i < half_stack)
+		//{
+			if (*(int *)stack_a->vector_get(stack_a, i) < median)
+			{
+				//ft_push(stack_a, stack_b);
+				printf("%d  ", *(int *)stack_a->vector_get(stack_a, i));
+			}
+			i++;
+			//else
+			//{
+			//	ft_rotate(stack_a);
+			//}
+		//}
+	}
+	printf("\nstack b %d\n",stack_b->used);
+//	for (int i = 0; i < stack_b->used; i++)
+//	{
+//		printf("%d ",*(int *)stack_b->vector_get(stack_b, i));
+//	}
+	return 0;
+}
+
+void	ft_sort_stack(t_vector *stack_a, t_vector *stack_b)
+{
+	double	median;
+
+	median = finding_the_median(stack_a);
+	printf("the median = %f \n", median);
+	ft_push_median_lowests(stack_a, stack_b, median);
+}
+
 void	push_swap(char **data)
 {
 	t_vector	stack_a;
@@ -53,15 +95,15 @@ void	push_swap(char **data)
 	ft_vector_init(&stack_a, sizeof(int));
 	ft_vector_init(&stack_b, sizeof(int));
 	ft_push_to_data_stack(&stack_a, data);
-	ft_push_to_data_stack(&stack_b, data);
 	if (ft_check_data_is_sorted(stack_a))
 	{
 		for (int i = 0; i < stack_a.used; i++)
 		{
 			printf("%d ",*(int *)stack_a.vector_get(&stack_a, i));
 		}
-		printf("\n");
-		printf("the median = %f \n", finding_the_median(&stack_a));
+		printf("\n sort: \n");
+		ft_sort_stack(&stack_a, &stack_b);
 	}
 	stack_a.vector_free(&stack_a);
+	stack_a.vector_free(&stack_b);
 }
