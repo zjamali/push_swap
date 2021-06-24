@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 20:54:19 by zjamali           #+#    #+#             */
-/*   Updated: 2021/06/24 14:27:11 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/06/24 16:55:57 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,33 +49,22 @@ int	ft_push_median_lowests(t_vector *stack_a, t_vector *stack_b,
 		double median)
 {
 	int	i;
+	int	half_stack;
 
 	i = 0;
-	int	half_stack;
 	half_stack = 0;
 	half_stack = stack_a->used / 2;
 	while (i < stack_a->used - 1)
 	{
-		//if (stack_a->used > 1 && i < half_stack)
-		//{
-			if (*(int *)stack_a->vector_get(stack_a, i) < median)
-			{
-				//ft_push(stack_a, stack_b);
-				printf("%d  ", *(int *)stack_a->vector_get(stack_a, i));
-			}
-			i++;
-			//else
-			//{
-			//	ft_rotate(stack_a);
-			//}
-		//}
+		if (*(int *)stack_a->vector_get(stack_a, i) < median)
+		{
+			ft_push(stack_a, stack_b);
+			printf("%d  ", *(int *)stack_a->vector_get(stack_a, i));
+		}
+		i++;
 	}
 	printf("\nstack b %d\n",stack_b->used);
-//	for (int i = 0; i < stack_b->used; i++)
-//	{
-//		printf("%d ",*(int *)stack_b->vector_get(stack_b, i));
-//	}
-	return 0;
+	return (0);
 }
 
 void	ft_sort_stack(t_vector *stack_a, t_vector *stack_b)
@@ -85,6 +74,11 @@ void	ft_sort_stack(t_vector *stack_a, t_vector *stack_b)
 	median = finding_the_median(stack_a);
 	printf("the median = %f \n", median);
 	ft_push_median_lowests(stack_a, stack_b, median);
+	printf("stack b ;;;;\n");
+	for (int i = 0; i < stack_b->used; i++)
+	{
+		printf("%d \n",*(int *)stack_b->vector_get(stack_b, i));
+	}
 }
 
 void	push_swap(char **data)
