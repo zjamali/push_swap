@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 20:28:50 by zjamali           #+#    #+#             */
-/*   Updated: 2021/06/23 18:32:54 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/06/24 11:02:19 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,5 @@ void	ft_swap_both_stacks(t_vector *stack_a, t_vector *stack_b);
 void	ft_rotate_both_stacks(t_vector *stack_a, t_vector *stack_b);
 void	ft_reverse_rotate_both_stacks(t_vector *stack_a, t_vector *stack_b);
 double	get_the_median(int *items, int index, t_medain mid);
-double 	finding_the_median(t_vector *stack);
+double	finding_the_median(t_vector *stack);
 #endif
