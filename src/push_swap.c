@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 20:54:19 by zjamali           #+#    #+#             */
-/*   Updated: 2021/06/24 16:55:57 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/06/24 17:12:29 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,17 @@ int	ft_push_median_lowests(t_vector *stack_a, t_vector *stack_b,
 	i = 0;
 	half_stack = 0;
 	half_stack = stack_a->used / 2;
-	while (i < stack_a->used - 1)
+	while (i < half_stack)
 	{
-		if (*(int *)stack_a->vector_get(stack_a, i) < median)
+		if ((*(int *)stack_a->vector_get(stack_a, 0) + 0.0) < median)
 		{
 			ft_push(stack_a, stack_b);
-			printf("%d  ", *(int *)stack_a->vector_get(stack_a, i));
+			i++;
 		}
-		i++;
+		else
+			ft_rotate(stack_a);
 	}
-	printf("\nstack b %d\n",stack_b->used);
+	printf("\nstack b %d\n", stack_b->used);
 	return (0);
 }
 
@@ -77,7 +78,7 @@ void	ft_sort_stack(t_vector *stack_a, t_vector *stack_b)
 	printf("stack b ;;;;\n");
 	for (int i = 0; i < stack_b->used; i++)
 	{
-		printf("%d \n",*(int *)stack_b->vector_get(stack_b, i));
+		printf("%d ",*(int *)stack_b->vector_get(stack_b, i));
 	}
 }
 
