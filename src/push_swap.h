@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 20:28:50 by zjamali           #+#    #+#             */
-/*   Updated: 2021/06/25 07:23:25 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/06/25 12:29:17 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@ typedef struct s_median
 	int		*items;
 	int		array_leng;
 }				t_medain;
+
+typedef struct s_range
+{
+	int	min;
+	int	max;
+}	t_range;
 
 typedef struct s_is_sorted
 {
@@ -49,4 +55,5 @@ void	ft_reverse_rotate_both_stacks(t_vector *stack_a, t_vector *stack_b);
 double	get_the_median(int *items, int array_length, int min, int max);
 double	finding_the_median(t_vector *stack);
 int		ft_check_stack_circular_sorted(t_vector *stack);
+void	ft_sort_stack(t_vector *stack_a, t_vector *stack_b);
 #endif
