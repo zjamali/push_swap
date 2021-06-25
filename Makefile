@@ -14,7 +14,8 @@ SRC_NAME = main.c\
 	push_swap.c\
 	instructions.c\
 	instructions_two_stacks.c\
-	find_median.c
+	find_median.c\
+	ft_check_circular_sorted.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
