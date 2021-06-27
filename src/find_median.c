@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 18:26:04 by zjamali           #+#    #+#             */
-/*   Updated: 2021/06/24 18:22:02 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/06/27 21:44:08 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ double 	finding_the_median(t_vector *stack)
 	min = INT_MAX;
 	max = INT_MIN;
 	ft_get_max_and_min(stack->items, stack->used, &min, &max);
-	printf("min:%d \t max:%d\n", min, max);
 	median.array_leng = stack->used;
 	median.items = stack->items;
 	median.min = min + 0.0;
