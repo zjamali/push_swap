@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 18:30:03 by zjamali           #+#    #+#             */
-/*   Updated: 2021/06/27 18:19:15 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/06/28 20:50:19 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	ft_swap_both_stacks(t_vector *stack_a, t_vector *stack_b)
 {
-	ft_putstr_fd("both ",1);
 	ft_swap(stack_a);
 	ft_swap(stack_b);
 }

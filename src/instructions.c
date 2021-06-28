@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/18 14:02:58 by zjamali           #+#    #+#             */
-/*   Updated: 2021/06/27 21:38:59 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/06/28 19:12:05 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ void	ft_push(t_vector *stack_from, t_vector *stack_to)
 	if (stack_from->used >= 1)
 	{
 		if (stack_to->used == 0)
+		{
 			stack_to->vector_add(stack_to,
-				stack_from->vector_get(stack_from, 0));	
+				stack_from->vector_get(stack_from, 0));
+		}
 		else
 		{
 			stack_to->vector_insert(stack_to, 0,
