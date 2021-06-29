@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 19:09:16 by zjamali           #+#    #+#             */
-/*   Updated: 2021/06/29 21:36:13 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/06/29 21:46:00 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ int	*find_sequence(t_vector *stack, int *max)
 			j++;
 		}
 		i++;
+	}
+	printf("\n\n");
+	for (int i = 0; i < stack->used; i++)
+	{
+		printf("%d ",long_squence[i]);
 	}
 	return (long_squence);
 }
@@ -93,7 +98,6 @@ void	ft_move_min_number_to_top(t_vector *stack)
 			min_index--;
 		}
 	}
-	
 }
 
 void	ft_sort_using_sequence(t_vector *stack_a, t_vector *stack_b)
@@ -101,13 +105,13 @@ void	ft_sort_using_sequence(t_vector *stack_a, t_vector *stack_b)
 	t_vector	tmp_stack;
 	t_vector	*long_sequence;
 	int			i;
-	
+
 	(void)stack_b;
 	ft_vector_init(&tmp_stack, sizeof(int));
 	i = 0;
 	while (i < stack_a->used)
 	{
-		tmp_stack.vector_add(&tmp_stack ,stack_a->vector_get(stack_a,i));
+		tmp_stack.vector_add(&tmp_stack, stack_a->vector_get(stack_a, i));
 		i++;
 	}
 	for (int i = 0; i < stack_a->used; i++)
@@ -122,7 +126,6 @@ void	ft_sort_using_sequence(t_vector *stack_a, t_vector *stack_b)
 	}
 	printf("\n\n");
 	long_sequence = find_longest_sorted_sequence(tmp_stack);
-
 	//for (int i = 0; i < tmp_stack.used; i++)
 	//{
 	//	printf("%d  ",long_sequence[i]);
