@@ -251,8 +251,6 @@ void	ft_sort_hundr_less_numbers(t_vector *stack_a, t_vector *stack_b)
 
 	i = 0;
 	sorted = ft_select_sort(stack_a);
-	for (int i = 0; i < stack_a->used; i++)
-		printf("%d\t",sorted[i]);
 }
 
 void	ft_sort_stack(t_vector *stack_a, t_vector *stack_b)
