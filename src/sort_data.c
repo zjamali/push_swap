@@ -208,13 +208,12 @@ void	ft_sort_two_numbers(t_vector *stack)
 
 int	*ft_select_sort(t_vector *stack)
 {
-	int	min_number;
 	int	min_number_index;
 	int	i;
 	int	j;
 	int *sorted;
 
-	sorted = (int *)malloc(sizeof(int) * stack->used + 1);
+	sorted = (int *)malloc(sizeof(int) * stack->used + 0);
 	i = 0;
 	while (i < stack->used )
 	{
@@ -224,20 +223,22 @@ int	*ft_select_sort(t_vector *stack)
 	i = 0;
 	while (i < stack->used - 1)
 	{
-		min_number = sorted[i];
+		min_number_index = i;
 		j = i + 1;
 		while (j < stack->used)
 		{
-			if (sorted[j] < min_number)
+			if (sorted[j] < sorted[min_number_index])
 			{
-				min_number = sorted[j];
 				min_number_index = j;
 			}
 			j++;
 		}
-		int tmp = sorted[min_number_index];
-		sorted[min_number_index] = sorted[i];
-		sorted[i] = tmp;
+		if (min_number_index != i)
+		{
+			int tmp = sorted[min_number_index];
+			sorted[min_number_index] = sorted[i];
+			sorted[i] = tmp;
+		}
 		i++;
 	}
 	return (sorted);
@@ -248,14 +249,10 @@ void	ft_sort_hundr_less_numbers(t_vector *stack_a, t_vector *stack_b)
 	(void)stack_b;
 	int *sorted;
 
-	
 	i = 0;
 	sorted = ft_select_sort(stack_a);
-
 	for (int i = 0; i < stack_a->used; i++)
-	{
-		printf("%d ",sorted[i]);
-	}
+		printf("%d\t",sorted[i]);
 }
 
 void	ft_sort_stack(t_vector *stack_a, t_vector *stack_b)
