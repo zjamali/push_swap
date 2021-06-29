@@ -6,38 +6,11 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 12:08:31 by zjamali           #+#    #+#             */
-/*   Updated: 2021/06/28 22:10:10 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/06/29 19:25:58 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-
-int	ft_push_median_lowests(t_vector *stack_a, t_vector *stack_b,
-		double median)
-{
-	int	i;
-	int	half_stack;
-
-	i = 0;
-	half_stack = 0;
-	half_stack = stack_a->used / 2;
-	while (i < half_stack)
-	{
-		if ((*(int *)stack_a->vector_get(stack_a, 0) + 0.0) < median)
-		{
-			ft_putstr_fd("pb\n", 1);
-			ft_push(stack_a, stack_b);
-			i++;
-		}
-		else
-		{
-			ft_putstr_fd("ra\n", 1);
-			ft_rotate(stack_a);
-		}
-	}
-	return (0);
-}
 
 /*
 * desired_stack = 0 -> a || desired_stack = 1 ->b
@@ -77,6 +50,23 @@ int	ft_check_stack_top(t_vector *stack, int desired_stack, int min, int max)
 	return (0);
 }
 */
+
+void	ft_sort_three_continue(int *items, t_vector *stack)
+{
+	if (items[1] > items[2] && items[0] < items[2])
+	{
+		ft_putstr_fd("sa\n", 1);
+		ft_putstr_fd("ra\n", 1);
+		ft_swap(stack);
+		ft_rotate(stack);
+	}
+	else if (items[0] < items[1] && items[0] > items[2])
+	{
+		ft_putstr_fd("rra\n", 1);
+		ft_reverse_rotate(stack);
+	}
+}
+
 void	ft_sort_three_numbers(t_vector *stack)
 {
 	int	*items;
@@ -99,18 +89,34 @@ void	ft_sort_three_numbers(t_vector *stack)
 		ft_putstr_fd("ra\n", 1);
 		ft_rotate(stack);
 	}
-	else if (items[1] > items[2] && items[0] < items[2])
+	else
+		ft_sort_three_continue(items, stack);
+}
+
+int	ft_push_median_lowests(t_vector *stack_a, t_vector *stack_b,
+		double median)
+{
+	int	i;
+	int	half_stack;
+
+	i = 0;
+	half_stack = 0;
+	half_stack = stack_a->used / 2;
+	while (i < half_stack)
 	{
-		ft_putstr_fd("sa\n", 1);
-		ft_putstr_fd("ra\n", 1);
-		ft_swap(stack);
-		ft_rotate(stack);
+		if ((*(int *)stack_a->vector_get(stack_a, 0) + 0.0) < median)
+		{
+			ft_putstr_fd("pb\n", 1);
+			ft_push(stack_a, stack_b);
+			i++;
+		}
+		else
+		{
+			ft_putstr_fd("ra\n", 1);
+			ft_rotate(stack_a);
+		}
 	}
-	else if (items[0] < items[1] && items[0] > items[2])
-	{
-		ft_putstr_fd("rra\n", 1);
-		ft_reverse_rotate(stack);
-	}
+	return (0);
 }
 
 void	ft_sort_five_numbers(t_vector *stack_a, t_vector *stack_b)
@@ -140,60 +146,65 @@ int	ft_get_min_index(t_vector *stack)
 	int	max;
 
 	i = 0;
-	
 	ft_get_max_and_min(stack->items, stack->used, &min, &max);
 	while (i < stack->used - 1)
 	{
-		if (*(int *)stack->vector_get(stack,i) ==  min)
+		if (*(int *)stack->vector_get(stack, i) == min)
 			break ;
 		i++;
 	}
 	return (i);
 }
 
-void	ft_sort_ten_numbers(t_vector *stack_a, t_vector *stack_b)
+void	push_two_min_numbers(t_vector *stack_a, t_vector *stack_b)
 {
 	int	min_index;
+
+	min_index = ft_get_min_index(stack_a);
+	if (min_index > ((stack_a->used - 1) / 2))
+	{
+		while (min_index < stack_a->used)
+		{
+			ft_putstr_fd("rra\n", 1);
+			ft_reverse_rotate(stack_a);
+			min_index++;
+		}
+		ft_putstr_fd("pb\n", 1);
+		ft_push(stack_a, stack_b);
+	}
+	else
+	{
+		while (min_index > 0)
+		{
+			ft_putstr_fd("ra\n", 1);
+			ft_rotate(stack_a);
+			min_index--;
+		}
+		ft_putstr_fd("pb\n", 1);
+		ft_push(stack_a, stack_b);
+	}
+}
+/*
+void	ft_sort_ten_numbers(t_vector *stack_a, t_vector *stack_b)
+{
 	int	i;
 
 	i = 0;
 	while (i < 5)
 	{
-		min_index = ft_get_min_index(stack_a);
-		if (min_index > ((stack_a->used - 1) / 2))
-		{
-			while (min_index < stack_a->used)
-			{
-				ft_putstr_fd("rra\n",1);
-				ft_reverse_rotate(stack_a);
-				min_index++;
-			}
-			ft_putstr_fd("pb\n",1);
-			ft_push(stack_a, stack_b);
-		}
-		else
-		{
-			while (min_index > 0)
-			{
-				ft_putstr_fd("ra\n",1);
-				ft_rotate(stack_a);
-				min_index--;
-			}
-			ft_putstr_fd("pb\n",1);
-			ft_push(stack_a, stack_b);
-		}
+		push_two_min_numbers(stack_a, stack_b);
 		i++;
 	}
 	ft_sort_five_numbers(stack_a, stack_b);
 	i = 0;
 	while (i < 5)
 	{
-		ft_putstr_fd("pa\n",1);
+		ft_putstr_fd("pa\n", 1);
 		ft_push(stack_b, stack_a);
 		i++;
 	}
 }
-
+*/
 void	ft_sort_two_numbers(t_vector *stack)
 {
 	int	*items;
@@ -205,55 +216,58 @@ void	ft_sort_two_numbers(t_vector *stack)
 		ft_swap(stack);
 	}
 }
-
-int	*ft_select_sort(t_vector *stack)
+/*
+void	select_sort_swap(int *array, int i, int min_index)
 {
-	int	min_number_index;
+	int	tmp;
+
+	tmp = array[min_index];
+	array[min_index] = array[i];
+	array[i] = tmp;
+}
+
+void	ft_select_sort(int *sorted,int array_len)
+{
+	int	min_index;
 	int	i;
 	int	j;
-	int	*sorted;
 
-	sorted = (int *)malloc(sizeof(int) * stack->used + 0);
 	i = 0;
-	while (i < stack->used)
+	while (i < array_len)
 	{
-		sorted[i] = *(int*)stack->vector_get(stack, i);
-		i++;
-	}
-	i = 0;
-	while (i < stack->used)
-	{
-		min_number_index = i;
+		min_index = i;
 		j = i + 1;
-		while (j < stack->used)
+		while (j < array_len)
 		{
-			if (sorted[j] < sorted[min_number_index])
-			{
-				min_number_index = j;
-			}
+			if (sorted[j] < sorted[min_index])
+				min_index = j;
 			j++;
 		}
-		if (min_number_index != i)
-		{
-			int tmp = sorted[min_number_index];
-			sorted[min_number_index] = sorted[i];
-			sorted[i] = tmp;
-		}
+		if (min_index != i)
+			select_sort_swap(sorted, i, min_index);
 		i++;
 	}
-	return (sorted);
 }
+
 void	ft_sort_hundr_less_numbers(t_vector *stack_a, t_vector *stack_b)
 {
-	int			i;
-	(void)stack_b;
-	int *sorted;
+	int	i;
+	int	*sorted;
 
+	(void)stack_b;
 	i = 0;
-	sorted = ft_select_sort(stack_a);
+	sorted = (int *)malloc(sizeof(int) * stack_a->used + 0);
+	i = 0;
+	while (i < stack_a->used)
+	{
+		sorted[i] = *(int *)stack_a->vector_get(stack_a, i);
+		i++;
+	}
+	ft_select_sort(sorted, stack_a->used);
 	for (int i = 0; i < stack_a->used; i++)
-		printf("%d\t",sorted[i]);
+		printf("%d\n",sorted[i]);	
 }
+*/
 
 void	ft_sort_stack(t_vector *stack_a, t_vector *stack_b)
 {
@@ -262,10 +276,14 @@ void	ft_sort_stack(t_vector *stack_a, t_vector *stack_b)
 		ft_sort_two_numbers(stack_a);
 	else if (stack_a->used == 3)
 		ft_sort_three_numbers(stack_a);
-	else if (stack_a->used == 5)
-		ft_sort_five_numbers(stack_a, stack_b);
-	else if (stack_a->used == 10)
-		ft_sort_ten_numbers(stack_a, stack_b);
-	else if (stack_a->used > 10 && stack_a->used <= 100)
-		ft_sort_hundr_less_numbers(stack_a, stack_b);
+	else
+	{
+		ft_sort_using_sequence(stack_a, stack_b);
+	}
+	//else if (stack_a->used == 5)
+	//	ft_sort_five_numbers(stack_a, stack_b);
+	//else if (stack_a->used == 10)
+	//	ft_sort_ten_numbers(stack_a, stack_b);
+	//else if (stack_a->used > 10 && stack_a->used <= 100)
+	//	ft_sort_hundr_less_numbers(stack_a, stack_b);
 }
