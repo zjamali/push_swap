@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 12:08:31 by zjamali           #+#    #+#             */
-/*   Updated: 2021/06/28 22:08:09 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/06/28 22:10:10 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,17 +212,17 @@ int	*ft_select_sort(t_vector *stack)
 	int	min_number_index;
 	int	i;
 	int	j;
-	int *sorted;
+	int	*sorted;
 
 	sorted = (int *)malloc(sizeof(int) * stack->used + 1);
 	i = 0;
-	while (i < stack->used )
+	while (i < stack->used)
 	{
 		sorted[i] = *(int*)stack->vector_get(stack, i);
 		i++;
 	}
 	i = 0;
-	while (i < stack->used - 1)
+	while (i < stack->used)
 	{
 		min_number = sorted[i];
 		j = i + 1;
