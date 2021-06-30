@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 12:08:31 by zjamali           #+#    #+#             */
-/*   Updated: 2021/06/29 19:25:58 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/06/30 21:15:33 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,24 @@ void	ft_sort_five_numbers(t_vector *stack_a, t_vector *stack_b)
 	ft_push(stack_b, stack_a);
 }
 
-int	ft_get_min_index(t_vector *stack)
+int	ft_find_max_index(t_vector *stack)
+{
+	int	i;
+	int	min;
+	int	max;
+
+	i = 0;
+	ft_get_max_and_min(stack->items, stack->used, &min, &max);
+	while (i < stack->used - 1)
+	{
+		if (*(int *)stack->vector_get(stack, i) == max)
+			break ;
+		i++;
+	}
+	return (i);
+}
+
+int	ft_find_min_index(t_vector *stack)
 {
 	int	i;
 	int	min;
@@ -160,7 +177,7 @@ void	push_two_min_numbers(t_vector *stack_a, t_vector *stack_b)
 {
 	int	min_index;
 
-	min_index = ft_get_min_index(stack_a);
+	min_index = ft_find_min_index(stack_a);
 	if (min_index > ((stack_a->used - 1) / 2))
 	{
 		while (min_index < stack_a->used)
@@ -278,6 +295,10 @@ void	ft_sort_stack(t_vector *stack_a, t_vector *stack_b)
 		ft_sort_three_numbers(stack_a);
 	else
 	{
+		printf("stack a:\n");
+		for (int i = 0; i < stack_a->used; i++)
+			printf("%d ",*(int *)stack_a->vector_get(stack_a,i));
+		printf("\n");
 		ft_sort_using_sequence(stack_a, stack_b);
 		printf("stack a:\n");
 		for (int i = 0; i < stack_a->used; i++)

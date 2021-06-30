@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 20:28:50 by zjamali           #+#    #+#             */
-/*   Updated: 2021/06/29 19:35:15 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/06/30 20:52:58 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,6 @@ double	finding_the_median(t_vector *stack);
 int		ft_check_stack_circular_sorted(t_vector *stack);
 void	ft_sort_stack(t_vector *stack_a, t_vector *stack_b);
 void	ft_sort_using_sequence(t_vector *stack_a, t_vector *stack_b);
-int		ft_get_min_index(t_vector *stack);
+int		ft_find_min_index(t_vector *stack);
+int		ft_find_max_index(t_vector *stack);
 #endif

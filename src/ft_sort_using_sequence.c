@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 19:09:16 by zjamali           #+#    #+#             */
-/*   Updated: 2021/06/29 21:46:00 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/06/30 21:28:10 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ int	*compute_lis_value(t_vector *stack, int *max)
 		}
 		i++;
 	}
-	printf("\n\n");
-	for (int i = 0; i < stack->used; i++)
-	{
-		printf("%d ",long_squence[i]);
-	}
+	//printf("\n\n");
+	//for (int i = 0; i < stack->used; i++)
+	//{
+	//	printf("%d ",long_squence[i]);
+	//}
 	return (long_squence);
 }
 
@@ -81,7 +81,7 @@ void	ft_move_min_number_to_top(t_vector *stack)
 {
 	int	min_index;
 
-	min_index = ft_get_min_index(stack);
+	min_index = ft_find_min_index(stack);
 	if (min_index > ((stack->used - 1) / 2))
 	{
 		while (min_index < stack->used)
@@ -140,13 +140,103 @@ void	ft_push_to_b(t_vector *stack_a, t_vector *stack_b,
 	}
 }
 
+int	ft_count_op(t_vector *stack_a, t_vector *stack_b, int idx_in_a,
+		int idx_in_b)
+{
+	int	ops;
+
+	if (idx_in_a < stack_a->used - idx_in_a)
+		ops = idx_in_a;
+	else
+		ops = stack_a->used - idx_in_a;
+	if (idx_in_b < stack_b->used - idx_in_b)
+		ops = ops + idx_in_b;
+	else
+		ops = ops + stack_b->used - idx_in_b ;
+	return (ops);
+}
+
+int	find_place(t_vector *stack, int number)
+{
+	int	i;
+	int	*items;
+	int	last_index;
+	int	max_val_position;
+
+	last_index = stack->used - 1;
+	items = stack->items;
+	printf("\nitems\n");
+	for (int i = 0; i <= last_index; i++)
+	{
+		printf("items[%d]= %d\n",i ,items[last_index - i]);
+	}
+	printf("\n");
+	i = 0;
+	while (i < stack->used)
+	{
+		if (number > items[i] && number < items[last_index - i])
+		{
+			printf("%d < %d < %d\n",items[i],number,items[last_index - i]);
+			return (i);
+		}
+		if (number > items[i] && number < items[i + 1])
+		{
+			printf("%d < %d < %d\n",items[i],number,items[i + 1]);
+			return (i);
+		}
+		if (number > items[last_index - i]
+			&& number < items[last_index - i - 1])
+		{
+			printf("%d < %d < %d\n",items[last_index - i],number,items[last_index - i - 1]);
+			return (last_index - i);
+		}
+		i++;
+	}
+	//// need to max index position
+	max_val_position = ft_find_max_index(stack) + 1;
+	printf()
+	if (max_val_position == stack->used)
+		max_val_position = 0;
+	printf(" %d out of stack a\n",number);
+	return (last_index);
+}
+
+int	find_best(t_vector *stack_a, t_vector *stack_b)
+{
+	int			i;
+	t_vector	find_best;
+	int			index_in_a;
+	int			op_count;
+	int			min_ops_index;
+
+	ft_vector_init(&find_best ,sizeof(int));
+	i = 0;
+	while (i < stack_b->used)
+	{
+		index_in_a = find_place(stack_a, *(int*)stack_b->vector_get(stack_b ,i));
+		op_count = ft_count_op(stack_a, stack_b, index_in_a, i);
+		find_best.vector_add(&find_best, &op_count);
+		i++;
+	}
+	printf("find best: \n");
+	for (int i = 0; i < find_best.used ; i++)
+	{
+		printf("[%d] = %d \n",i , *(int *)find_best.vector_get(&find_best,i));
+	}
+	printf("\n");
+	min_ops_index = ft_find_min_index(&find_best);
+	printf("the best is : %d\n", min_ops_index);
+	find_best.vector_free(&find_best);
+	return (min_ops_index);
+}
+
 void	ft_sort_using_sequence(t_vector *stack_a, t_vector *stack_b)
 {
 	t_vector	tmp_stack;
 	t_vector	*long_inc_sequence;
 	int			i;
+	int			best_index;
 
-	(void)stack_b;
 	ft_vector_init(&tmp_stack, sizeof(int));
 	i = 0;
 	while (i < stack_a->used)
@@ -154,22 +244,17 @@ void	ft_sort_using_sequence(t_vector *stack_a, t_vector *stack_b)
 		tmp_stack.vector_add(&tmp_stack, stack_a->vector_get(stack_a, i));
 		i++;
 	}
-	for (int i = 0; i < stack_a->used; i++)
-	{
-		printf("%d ",*(int *)stack_a->vector_get(stack_a, i));
-	}
 	ft_move_min_number_to_top(&tmp_stack);
-	printf("\n\n");
-	for (int i = 0; i < tmp_stack.used; i++)
-	{
-		printf("%d ",*(int *)tmp_stack.vector_get(&tmp_stack, i));
-	}
-	printf("\n\n");
 	long_inc_sequence = find_longest_inc_sorted_sequence(tmp_stack);
-	printf("\n\n");
-	for (int i = 0; i < long_inc_sequence->used; i++)
-	{
-		printf("%d  ",*(int *)long_inc_sequence->vector_get(long_inc_sequence,i));
-	}
 	ft_push_to_b(stack_a, stack_b, long_inc_sequence);
+	best_index = find_best(stack_a, stack_b);
+	printf("the BEST ITEM in B to MOVE to A= %d\n",*(int *)stack_b->vector_get(stack_b, best_index));
+	
+//	int operatio = ft_count_op(index_in_a, 0);
+	//printf("place of %d  stack a : %d\n",top_b, index_in_a);	
 }
+
+///  7  6  5  2  4  3  1
+///  7  6  5  2  4  3  10
+
+/// 6 10 8 5 3 9 0 1 7 2 4
