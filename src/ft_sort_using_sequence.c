@@ -128,7 +128,7 @@ void	ft_push_to_b(t_vector *stack_a, t_vector *stack_b,
 		top = *(int *)stack_a->vector_get(stack_a, 0);
 		if (ft_check_number_in_squence(top,longet_inc_sequence))
 		{
-			ft_putstr_fd("sb\n", 1);
+			ft_putstr_fd("pb\n", 1);
 			ft_push(stack_a, stack_b);
 			i++;
 		}
