@@ -279,6 +279,12 @@ void	ft_sort_stack(t_vector *stack_a, t_vector *stack_b)
 	else
 	{
 		ft_sort_using_sequence(stack_a, stack_b);
+		printf("stack a:\n");
+		for (int i = 0; i < stack_a->used; i++)
+			printf("%d\t",*(int *)stack_a->vector_get(stack_a,i));
+		printf("\nstack b:\n");
+		for (int i = 0; i < stack_b->used; i++)
+			printf("%d\t",*(int *)stack_b->vector_get(stack_b,i));
 	}
 	//else if (stack_a->used == 5)
 	//	ft_sort_five_numbers(stack_a, stack_b);
