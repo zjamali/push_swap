@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 19:09:16 by zjamali           #+#    #+#             */
-/*   Updated: 2021/07/04 15:52:37 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/07/04 18:49:59 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -341,7 +341,7 @@ void	ft_sort_stack_a(t_vector *stack_a)
 	min_index = ft_find_min_index(stack_a);
 	if (min_index == 0)
 		return ;
-	if (min_index > stack_a->used / 2)
+	if (min_index > (stack_a->used / 2))
 	{
 		while (min_index < stack_a->used)
 		{
@@ -381,7 +381,6 @@ void	ft_sort_using_sequence(t_vector *stack_a, t_vector *stack_b)
 	long_inc_sequence = find_longest_inc_sorted_sequence(tmp_stack);
 	tmp_stack.vector_free(&tmp_stack);
 	ft_push_to_b(stack_a, stack_b, long_inc_sequence);
-	
 	long_inc_sequence->vector_free(long_inc_sequence);
 	free(long_inc_sequence);
 	while (stack_b->used > 0)

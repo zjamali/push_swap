@@ -25,9 +25,9 @@ HEDAERS = src/push_swap.h
 
 OBJ = $(addprefix $(OBJ_DIR)/,$(OBJ_NAME))
 
-all: $(NAME)
+all: libft vectors $(NAME)
 
-$(NAME): $(OBJ) libft vectors
+$(NAME): $(OBJ)
 	$(CC) $(OBJ) $(LIBFF_DIR)/libft.a $(VECTOR_DIR)/vectors.a -o $@
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEDAERS)
@@ -36,10 +36,10 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEDAERS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 libft:
-	make -sC src/libft
+	make -C src/libft
 
 vectors: 
-	make -sC src/vector_lib
+	make -C src/vector_lib
 clean:
 	rm -rf $(OBJ_DIR)/*.o
 	rm -rf src/libft/*.o

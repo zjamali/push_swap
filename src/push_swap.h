@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 20:28:50 by zjamali           #+#    #+#             */
-/*   Updated: 2021/07/04 13:39:18 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/07/04 18:54:30 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ typedef struct s_median
 	int		*items;
 	int		array_leng;
 }				t_medain;
-
 
 typedef struct s_is_sorted
 {
