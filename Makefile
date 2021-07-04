@@ -49,3 +49,5 @@ fclean: clean
 	rm -rf $(NAME)
 	rm -rf src/libft/libft.a
 	rm -rf src/vector_lib/vectors.a
+
+re: fclean all
