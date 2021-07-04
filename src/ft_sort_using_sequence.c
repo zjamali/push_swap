@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 19:09:16 by zjamali           #+#    #+#             */
-/*   Updated: 2021/07/04 13:49:14 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/07/04 15:52:37 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -379,7 +379,11 @@ void	ft_sort_using_sequence(t_vector *stack_a, t_vector *stack_b)
 	}
 	ft_move_min_number_to_top(&tmp_stack);
 	long_inc_sequence = find_longest_inc_sorted_sequence(tmp_stack);
+	tmp_stack.vector_free(&tmp_stack);
 	ft_push_to_b(stack_a, stack_b, long_inc_sequence);
+	
+	long_inc_sequence->vector_free(long_inc_sequence);
+	free(long_inc_sequence);
 	while (stack_b->used > 0)
 	{
 		best_index = find_best(stack_a, stack_b);
@@ -390,6 +394,5 @@ void	ft_sort_using_sequence(t_vector *stack_a, t_vector *stack_b)
 		ft_putstr_fd("pa\n", 1);
 		ft_push(stack_b, stack_a);
 	}
-	free(long_inc_sequence);
 	ft_sort_stack_a(stack_a);
 }
