@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 19:09:16 by zjamali           #+#    #+#             */
-/*   Updated: 2021/07/04 12:22:46 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/07/04 13:49:14 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,6 @@ int	*compute_lis_value(t_vector *stack, int *max)
 		}
 		i++;
 	}
-	//printf("\n\n");
-	//for (int i = 0; i < stack->used; i++)
-	//{
-	//	printf("%d ",long_squence[i]);
-	//}
 	return (long_squence);
 }
 
@@ -74,6 +69,7 @@ t_vector	*find_longest_inc_sorted_sequence(t_vector stack)
 		}
 		i--;
 	}
+	free(long_squence);
 	return (long_increasing_seq);
 }
 
@@ -110,10 +106,10 @@ int	ft_check_number_in_squence(int number, t_vector *longet_inc_sequence)
 	while (i < longet_inc_sequence->used)
 	{
 		if (number == items[i])
-			return 0;
+			return (0);
 		i++;
 	}
-	return 1;
+	return (1);
 }
 
 void	ft_push_to_b(t_vector *stack_a, t_vector *stack_b,
@@ -126,7 +122,7 @@ void	ft_push_to_b(t_vector *stack_a, t_vector *stack_b,
 	while (stack_a->used > longet_inc_sequence->used)
 	{
 		top = *(int *)stack_a->vector_get(stack_a, 0);
-		if (ft_check_number_in_squence(top,longet_inc_sequence))
+		if (ft_check_number_in_squence(top, longet_inc_sequence))
 		{
 			ft_putstr_fd("pb\n", 1);
 			ft_push(stack_a, stack_b);
@@ -180,15 +176,9 @@ int	find_place(t_vector *stack, int number)
 	if (items[max_val_position] < number)
 	{
 		if (max_val_position + 1 > last_index)
-		{
-			//printf("max value in last index\n");
 			return (0);
-		}
 		else
-		{
-		//	printf("add last\n");
 			return (max_val_position + 1);
-		}
 	}
 	int min_index = ft_find_min_index(stack);
 	int	max_index = ft_find_max_index(stack);
@@ -200,10 +190,8 @@ int	find_place(t_vector *stack, int number)
 	}
 	if (items[0] > number && number > items[last_index])
 		return (0);
-	//printf("%d :number is out\n", number);
 	return (last_index);
 }
-
 
 int	find_best(t_vector *stack_a, t_vector *stack_b)
 {
@@ -217,17 +205,12 @@ int	find_best(t_vector *stack_a, t_vector *stack_b)
 	i = 0;
 	while (i < stack_b->used)
 	{
-		index_in_a = find_place(stack_a, *(int *)stack_b->vector_get(stack_b, i));
-		//printf("place of %d in a %d\n", *(int*)stack_b->vector_get(stack_b , i), index_in_a);
+		index_in_a = find_place(stack_a,
+				*(int *)stack_b->vector_get(stack_b, i));
 		op_count = ft_count_op(stack_a, stack_b, index_in_a, i);
 		find_best.vector_add(&find_best, &op_count);
 		i++;
 	}
-//	printf("find best:\n");
-//	for (int i = 0; i < find_best.used; i++)
-//	{
-//		printf("[%d] = %d\n", i, *(int *)find_best.vector_get(&find_best, i));
-//	}
 	min_ops_index = 0;
 	min_ops_index = ft_find_min_index(&find_best);
 	find_best.vector_free(&find_best);
@@ -236,22 +219,6 @@ int	find_best(t_vector *stack_a, t_vector *stack_b)
 
 int	count_moves_in_stack_b(t_vector *stack, int best_index)
 {
-	/*
-	int	half_stack;
-
-	half_stack = (stack->used + 1) / 2;
-//	printf("best_index = %d || half = %d\n",best_index,half_stack);
-	if (best_index == stack->used)
-		return (-1);
-	if (half_stack >= best_index)
-		return (best_index);
-	else
-	{
-		printf("place down\n");
-		printf("place %d\n",half_stack - best_index);
-		return (half_stack - best_index);
-	}
-	*/
 	int	ops;
 	int	sign;
 
@@ -271,27 +238,20 @@ int	count_moves_in_stack_b(t_vector *stack, int best_index)
 int	count_moves_in_stack_a(t_vector *stack, int best_number)
 {
 	int	half_stack;
+	int	best_number_place;
 
 	half_stack = (stack->used + 1) / 2;
-	int best_number_place = find_place(stack,best_number);
-
-//	printf("best_number = %d || best_number_index = %d || half = %d\n", best_number,best_number_place, half_stack);
+	best_number_place = find_place(stack, best_number);
 	if (best_number_place == 0)
 		return (0);
 	if (best_number_place == stack->used)
 		return (-1);
 	else
 	{
-	//	printf("place down\n");
-	//	printf("best_number_place = %d || stack-size = %d || place %d\n",best_number_place, stack->used, stack->used - best_number_place);
 		if (half_stack < best_number_place)
-		{
 			return ((stack->used - best_number_place) * -1);
-		}
 		else
-		{
-			return (/*stack->used - */best_number_place);
-		}
+			return (best_number_place);
 	}
 }
 
@@ -377,9 +337,7 @@ void	ft_align_both_stacks(t_vector *stack_a, t_vector *stack_b,
 void	ft_sort_stack_a(t_vector *stack_a)
 {
 	int	min_index;
-//	int	min;
-//	int	max;
-	
+
 	min_index = ft_find_min_index(stack_a);
 	if (min_index == 0)
 		return ;
@@ -387,11 +345,6 @@ void	ft_sort_stack_a(t_vector *stack_a)
 	{
 		while (min_index < stack_a->used)
 		{
-			//if (*(int *)stack_a->vector_get(stack_a, 0) < *(int *)stack_a->vector_get(stack_a, 1))
-			//{
-			//	ft_putstr_fd("sa\n", 1);
-			//	ft_swap(stack_a);
-			//}
 			ft_putstr_fd("rra\n", 1);
 			ft_reverse_rotate(stack_a);
 			min_index++;
@@ -401,11 +354,6 @@ void	ft_sort_stack_a(t_vector *stack_a)
 	{
 		while (min_index > 0)
 		{
-			//if (*(int *)stack_a->vector_get(stack_a, 0) > *(int *)stack_a->vector_get(stack_a, 1))
-			//{
-			//	ft_putstr_fd("sa\n", 1);
-			//	ft_swap(stack_a);
-			//}
 			ft_putstr_fd("ra\n", 1);
 			ft_rotate(stack_a);
 			min_index--;
@@ -413,32 +361,6 @@ void	ft_sort_stack_a(t_vector *stack_a)
 	}
 }
 
-void	ft_last_sort(t_vector *stack)
-{
-		int	min_index;
-//	int	min;
-	
-//	int	max_index = ft_find_max_index(stack);
-	min_index = ft_find_min_index(stack);
-	if (min_index > stack->used / 2)
-	{
-		while (min_index < stack->used)
-		{
-			ft_putstr_fd("rra\n", 1);
-			ft_reverse_rotate(stack);
-			min_index++;
-		}
-	}
-	else
-	{
-		while (min_index > 0)
-		{
-			ft_putstr_fd("ra\n", 1);
-			ft_rotate(stack);
-			min_index--;
-		}
-	}
-}
 void	ft_sort_using_sequence(t_vector *stack_a, t_vector *stack_b)
 {
 	t_vector	tmp_stack;
@@ -448,10 +370,6 @@ void	ft_sort_using_sequence(t_vector *stack_a, t_vector *stack_b)
 	int			count_moves_a;
 	int			count_moves_b;
 
-	//printf("stack a:\n");
-	//for (int i = 0; i < stack_a->used; i++)
-	//	printf("%d ",*(int *)stack_a->vector_get(stack_a,i));
-	//printf("\n");
 	ft_vector_init(&tmp_stack, sizeof(int));
 	i = 0;
 	while (i < stack_a->used)
@@ -462,68 +380,16 @@ void	ft_sort_using_sequence(t_vector *stack_a, t_vector *stack_b)
 	ft_move_min_number_to_top(&tmp_stack);
 	long_inc_sequence = find_longest_inc_sorted_sequence(tmp_stack);
 	ft_push_to_b(stack_a, stack_b, long_inc_sequence);
-//	
-//	printf("stack a:\n");
-//	for (int i = 0; i < stack_a->used; i++)
-//		printf("%d ",*(int *)stack_a->vector_get(stack_a,i));
-//	printf("\nstack b:\n");
-//	for (int i = 0; i < stack_b->used; i++)
-//		printf("%d ",*(int *)stack_b->vector_get(stack_b,i));
-//	printf("\n");
-//
-//
-//	printf("stack a:\n");
-//	for (int i = 0; i < stack_a->used; i++)
-//		printf("%d ",*(int *)stack_a->vector_get(stack_a,i));
-//	printf("\nstack b:\n");
-//	for (int i = 0; i < stack_b->used; i++)
-//		printf("%d ",*(int *)stack_b->vector_get(stack_b,i));
-//	printf("\n");
-//	
-//	ft_sort_stack_a(stack_a);
 	while (stack_b->used > 0)
 	{
-//		printf("--------------------------\n");
-//		printf("stack a:\n");
-//		for (int i = 0; i < stack_a->used; i++)
-//			printf("%d ",*(int *)stack_a->vector_get(stack_a ,i));
-//		printf("\nstack b:\n");
-//		for (int i = 0; i < stack_b->used; i++)
-//			printf("%d ",*(int *)stack_b->vector_get(stack_b ,i));
-//		printf("\n");
-//		printf("--------------------------\n");
 		best_index = find_best(stack_a, stack_b);
-		count_moves_a = count_moves_in_stack_a(stack_a, *(int *)stack_b->vector_get(stack_b, best_index));
+		count_moves_a = count_moves_in_stack_a(stack_a,
+				*(int *)stack_b->vector_get(stack_b, best_index));
 		count_moves_b = count_moves_in_stack_b(stack_b, best_index);
-///		printf("best= %d || move_a = %d | move_b = %d\n", *(int *)stack_b->vector_get(stack_b, best_index), count_moves_a, count_moves_b);
-	//	break ;
 		ft_align_both_stacks(stack_a, stack_b, count_moves_a, count_moves_b);
 		ft_putstr_fd("pa\n", 1);
 		ft_push(stack_b, stack_a);
-		//int max_index = ft_find_max_index(stack_a);
-		//if (max_index == 0)
-		//	ft_sort_stack_a(stack_a);
 	}
-	//ft_sort_stack_a(stack_a);
-	ft_last_sort(stack_a);
-//	printf("\n\nresult\n");
-//	printf("--------------------------\n");
-//	printf("stack a:\n");
-//	for (int i = 0; i < stack_a->used; i++)
-//		printf("%d ",*(int *)stack_a->vector_get(stack_a ,i));
-//	printf("\nstack b:\n");
-//	for (int i = 0; i < stack_b->used; i++)
-//		printf("%d ",*(int *)stack_b->vector_get(stack_b ,i));
-//	printf("\n");
-//	printf("--------------------------\n");
-	//
+	free(long_inc_sequence);
+	ft_sort_stack_a(stack_a);
 }
-
-///  7  6  5  2  4  3  1
-///  7  6  5  2  4  3  10
-
-/// 6 10 8 5 3 9 0 1 7 2 4
-/// 4 5 7 2 3 9 10 0 6 8 1
-////  5 4 8 10 0 2 9 6 1 7 3  ****** 
-//// 5 2 7 8 3 9 1 4 6 0 10   ****
-///  8 7 4 9 1 5 10 3 6 0 2  ****

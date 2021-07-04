@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 20:28:50 by zjamali           #+#    #+#             */
-/*   Updated: 2021/06/30 20:52:58 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/07/04 13:39:18 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,5 @@ void	ft_sort_stack(t_vector *stack_a, t_vector *stack_b);
 void	ft_sort_using_sequence(t_vector *stack_a, t_vector *stack_b);
 int		ft_find_min_index(t_vector *stack);
 int		ft_find_max_index(t_vector *stack);
+void	ft_get_max_and_min(int *items, int len, int *min, int *max);
 #endif

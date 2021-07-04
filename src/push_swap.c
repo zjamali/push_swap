@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 20:54:19 by zjamali           #+#    #+#             */
-/*   Updated: 2021/06/27 21:43:45 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/07/04 13:42:25 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,7 @@ void	push_swap(char **data)
 	ft_vector_init(&stack_b, sizeof(int));
 	ft_push_to_data_stack(&stack_a, data);
 	if (stack_a.used > 1 && ft_check_data_is_sorted(stack_a))
-	{
-		//for (int i = 0; i < stack_a.used; i++)
-		//{
-		//	printf("%d ", *(int *)stack_a.vector_get(&stack_a, i));
-		//}
-		//printf("\n sort: \n");
 		ft_sort_stack(&stack_a, &stack_b);
-		//for (int i = 0; i < stack_a.used; i++)
-		//{
-		//	printf("%d ",*(int *)stack_a.vector_get(&stack_a, i));
-		//}
-	}
 	stack_a.vector_free(&stack_a);
 	stack_a.vector_free(&stack_b);
 }

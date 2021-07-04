@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 20:01:07 by zjamali           #+#    #+#             */
-/*   Updated: 2021/06/24 18:08:37 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/07/04 13:35:54 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,4 @@ void		*ft_vector_get(t_vector *vector, int index);
 int			ft_vector_delete(t_vector *vector, int index);
 int			ft_free_vector(t_vector *vector);
 int			ft_vector_used(t_vector *vector);
-void		ft_get_max_and_min(int *items, int len, int *min, int *max);
 #endif

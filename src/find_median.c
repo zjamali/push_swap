@@ -6,28 +6,11 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 18:26:04 by zjamali           #+#    #+#             */
-/*   Updated: 2021/06/27 21:44:08 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/07/04 13:39:53 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	ft_get_max_and_min(int *items, int len, int *min, int *max)
-{
-	int	i;
-
-	i = 0;
-	*max = INT_MIN;
-	*min = INT_MAX;
-	while (i < len)
-	{
-		if (items[i] < *min)
-			*min = items[i];
-		if (items[i] > *max)
-			*max = items[i];
-		i++;
-	}
-}
 
 void	count_lower_upper(int *items, double median, int len, int *lower_upper)
 {
@@ -81,7 +64,7 @@ double	get_the_median(int *items, int array_length, int min, int max)
 	return (median);
 }
 
-double 	finding_the_median(t_vector *stack)
+double	finding_the_median(t_vector *stack)
 {
 	t_medain	median;
 	int			max;
