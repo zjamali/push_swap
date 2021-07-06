@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 19:09:16 by zjamali           #+#    #+#             */
-/*   Updated: 2021/07/06 16:17:38 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/07/06 21:11:12 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	*compute_lis_value(t_vector *stack, int *max)
 	long_squence = (int *)malloc(sizeof(int) * stack->used);
 	long_squence[0] = 1;
 	i = 1;
+	*max = 0;
 	while (i < stack->used)
 	{
 		long_squence[i] = 1;
@@ -50,7 +51,6 @@ t_vector	*find_longest_inc_sorted_sequence(t_vector stack)
 	t_vector	*long_increasing_seq;
 	int			*long_squence;
 
-	max = 0;
 	long_squence = compute_lis_value(&stack, &max);
 	long_increasing_seq = (t_vector *)malloc(sizeof(t_vector));
 	ft_vector_init(long_increasing_seq, sizeof(int));

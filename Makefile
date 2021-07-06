@@ -17,7 +17,8 @@ SRC_NAME = main.c\
 	instructions_two_stacks.c\
 	find_median.c\
 	sort_data.c\
-	sort_five_and_less.c\
+	sort_five_numbers.c\
+	sort_less_then_five_numbers.c\
 	ft_sort_using_sequence.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 12:08:31 by zjamali           #+#    #+#             */
-/*   Updated: 2021/07/06 16:43:31 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/07/06 20:23:57 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	ft_sort_stack(t_vector *stack_a, t_vector *stack_b)
 		ft_sort_two_numbers(stack_a);
 	else if (stack_a->used == 3)
 		ft_sort_three_numbers(stack_a);
-	else if (stack_a->used == 5)
+	else if (stack_a->used <= 5)
 		ft_sort_five_numbers(stack_a, stack_b);
 	else
 		ft_sort_using_sequence(stack_a, stack_b);
