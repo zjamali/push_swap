@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 16:41:23 by zjamali           #+#    #+#             */
-/*   Updated: 2021/07/06 21:05:46 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/07/06 21:56:09 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	ft_push_b_two_min_numbers(t_vector *stack_a, t_vector *stack_b)
 	}
 	min_index = ft_find_min_index(&tmp);
 	mins[1] = *(int *)tmp.vector_get(&tmp, min_index);
+	tmp.vector_free(&tmp);
 	push_two_mins(stack_a, stack_b, mins);
 }
 
