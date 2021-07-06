@@ -1,31 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   instructions_two_stacks.c                          :+:      :+:    :+:   */
+/*   ft_check_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/18 18:30:03 by zjamali           #+#    #+#             */
-/*   Updated: 2021/07/06 16:22:35 by zjamali          ###   ########.fr       */
+/*   Created: 2021/07/06 16:26:53 by zjamali           #+#    #+#             */
+/*   Updated: 2021/07/06 16:27:24 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_swap_both_stacks(t_vector *stack_a, t_vector *stack_b)
+static int	ft_check_errors(char *data)
 {
-	ft_swap(stack_a);
-	ft_swap(stack_b);
+	int	i;
+	int	sign;
+
+	i = 0;
+	sign = 1;
+	if (data[0] == '-')
+	{
+		sign = -1;
+		i = 1;
+	}
+	if (data[0] == '+')
+		i = 1;
+	while (data[i])
+	{
+		if (!ft_isdigit(data[i]))
+			ft_display_error_and_exit();
+		i++;
+	}
+	ft_check_max_and_min(data);
+	return (0);
 }
 
-void	ft_rotate_both_stacks(t_vector *stack_a, t_vector *stack_b)
+int	ft_check_data(char **data)
 {
-	ft_rotate(stack_a);
-	ft_rotate(stack_b);
-}
+	int	i;
 
-void	ft_reverse_rotate_both_stacks(t_vector *stack_a, t_vector *stack_b)
-{
-	ft_reverse_rotate(stack_a);
-	ft_reverse_rotate(stack_b);
+	i = 0;
+	while (data[i])
+	{
+		ft_check_errors(data[i]);
+		i++;
+	}
+	ft_check_duplicated(data);
+	return (1);
 }

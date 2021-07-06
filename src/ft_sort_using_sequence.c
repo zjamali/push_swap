@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 19:09:16 by zjamali           #+#    #+#             */
-/*   Updated: 2021/07/04 18:49:59 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/07/06 16:17:38 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,20 +264,20 @@ void	ft_align_both_stacks(t_vector *stack_a, t_vector *stack_b,
 		{
 			while (move_a > 0 && move_b > 0)
 			{
-				ft_putstr_fd("rr\n",1);
+				ft_putstr_fd("rr\n", 1);
 				ft_rotate_both_stacks(stack_a, stack_b);
 				move_a--;
 				move_b--;
 			}
 			while (move_a > 0)
 			{
-				ft_putstr_fd("ra\n",1);
+				ft_putstr_fd("ra\n", 1);
 				ft_rotate(stack_a);
 				move_a--;
 			}
 			while (move_b > 0)
 			{
-				ft_putstr_fd("rb\n",1);
+				ft_putstr_fd("rb\n", 1);
 				ft_rotate(stack_b);
 				move_b--;
 			}
@@ -293,13 +293,13 @@ void	ft_align_both_stacks(t_vector *stack_a, t_vector *stack_b,
 			}
 			while (move_a < 0)
 			{
-				ft_putstr_fd("rra\n",1);
+				ft_putstr_fd("rra\n", 1);
 				ft_reverse_rotate(stack_a);
 				move_a = move_a + 1;
 			}
 			while (move_b < 0)
 			{
-				ft_putstr_fd("rrb\n",1);
+				ft_putstr_fd("rrb\n", 1);
 				ft_reverse_rotate(stack_b);
 				move_b = move_b + 1;
 			}
@@ -309,25 +309,25 @@ void	ft_align_both_stacks(t_vector *stack_a, t_vector *stack_b,
 	{
 		while (move_a < 0)
 		{
-			ft_putstr_fd("rra\n",1);
+			ft_putstr_fd("rra\n", 1);
 			ft_reverse_rotate(stack_a);
 			move_a = move_a + 1;
 		}
 		while (move_b < 0)
 		{
-			ft_putstr_fd("rrb\n",1);
+			ft_putstr_fd("rrb\n", 1);
 			ft_reverse_rotate(stack_b);
 			move_b = move_b + 1;
 		}
 		while (move_a > 0)
 		{
-			ft_putstr_fd("ra\n",1);
+			ft_putstr_fd("ra\n", 1);
 			ft_rotate(stack_a);
 			move_a--;
 		}
 		while (move_b > 0)
 		{
-			ft_putstr_fd("rb\n",1);
+			ft_putstr_fd("rb\n", 1);
 			ft_rotate(stack_b);
 			move_b--;
 		}
@@ -361,17 +361,14 @@ void	ft_sort_stack_a(t_vector *stack_a)
 	}
 }
 
-void	ft_sort_using_sequence(t_vector *stack_a, t_vector *stack_b)
+t_vector	*ft_long_inc_sequnce(t_vector *stack_a)
 {
-	t_vector	tmp_stack;
 	t_vector	*long_inc_sequence;
+	t_vector	tmp_stack;
 	int			i;
-	int			best_index;
-	int			count_moves_a;
-	int			count_moves_b;
 
-	ft_vector_init(&tmp_stack, sizeof(int));
 	i = 0;
+	ft_vector_init(&tmp_stack, sizeof(int));
 	while (i < stack_a->used)
 	{
 		tmp_stack.vector_add(&tmp_stack, stack_a->vector_get(stack_a, i));
@@ -380,6 +377,17 @@ void	ft_sort_using_sequence(t_vector *stack_a, t_vector *stack_b)
 	ft_move_min_number_to_top(&tmp_stack);
 	long_inc_sequence = find_longest_inc_sorted_sequence(tmp_stack);
 	tmp_stack.vector_free(&tmp_stack);
+	return (long_inc_sequence);
+}
+
+void	ft_sort_using_sequence(t_vector *stack_a, t_vector *stack_b)
+{
+	t_vector	*long_inc_sequence;
+	int			best_index;
+	int			count_moves_a;
+	int			count_moves_b;
+
+	long_inc_sequence = ft_long_inc_sequnce(stack_a);
 	ft_push_to_b(stack_a, stack_b, long_inc_sequence);
 	long_inc_sequence->vector_free(long_inc_sequence);
 	free(long_inc_sequence);

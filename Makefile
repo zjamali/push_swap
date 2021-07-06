@@ -10,13 +10,14 @@ CFLAGS = -Wall -Werror -Wextra
 CC = gcc
 
 SRC_NAME = main.c\
+	ft_check_data.c\
 	ft_check_errors.c\
 	push_swap.c\
 	instructions.c\
 	instructions_two_stacks.c\
 	find_median.c\
-	ft_check_circular_sorted.c\
 	sort_data.c\
+	sort_five_and_less.c\
 	ft_sort_using_sequence.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)

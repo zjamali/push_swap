@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 18:08:16 by zjamali           #+#    #+#             */
-/*   Updated: 2021/06/23 18:33:48 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/07/06 16:28:24 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_display_error_and_exit(void)
 {
-	ft_putstr_fd("Error\n",1);
+	ft_putstr_fd("Error\n", 1);
 	exit(EXIT_FAILURE);
 }
 
@@ -42,7 +42,7 @@ static long int	ft_str_to_number(char *str)
 	return (sign * number);
 }
 
-static void	ft_check_max_and_min(char *data)
+void	ft_check_max_and_min(char *data)
 {
 	long int	number;
 
@@ -65,7 +65,7 @@ size_t	ft_lenght(char *s1, char *s2)
 		return (len2);
 }
 
-static void	ft_check_duplicated(char **data)
+void	ft_check_duplicated(char **data)
 {
 	int	i;
 	int	j;
@@ -86,42 +86,4 @@ static void	ft_check_duplicated(char **data)
 		}
 		i++;
 	}
-}
-
-static int	ft_check_errors(char *data)
-{
-	int	i;
-	int	sign;
-
-	i = 0;
-	sign = 1;
-	if (data[0] == '-')
-	{
-		sign = -1;
-		i = 1;
-	}
-	if (data[0] == '+')
-		i = 1;
-	while (data[i])
-	{
-		if (!ft_isdigit(data[i]))
-			ft_display_error_and_exit();
-		i++;
-	}
-	ft_check_max_and_min(data);
-	return (0);
-}
-
-int	ft_check_data(char **data)
-{
-	int	i;
-
-	i = 0;
-	while (data[i])
-	{
-		ft_check_errors(data[i]);
-		i++;
-	}
-	ft_check_duplicated(data);
-	return (1);
 }
