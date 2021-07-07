@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zjamali <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/21 18:57:04 by zjamali           #+#    #+#              #
-#    Updated: 2019/11/13 17:59:26 by zjamali          ###   ########.fr        #
+#    Updated: 2021/07/07 20:35:36 by zjamali          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,7 @@ SRCB= ft_lstnew_bonus.c     ft_lstadd_front_bonus.c   ft_lstsize_bonus.c    ft_l
 LIB= libft.h
 OBJ= $(SRC:.c=.o)
 OBJB= $(SRCB:.c=.o)
-CFLAGS=  -Wall -Wextra -Werror 
-
+CFLAGS=  -Wall -Wextra -Werror
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIB)

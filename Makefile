@@ -35,7 +35,6 @@ $(NAME): $(OBJ)
 	$(CC) $(OBJ) $(LIBFF_DIR)/libft.a $(VECTOR_DIR)/vectors.a -o $@
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEDAERS)
-	@echo $@
 	@mkdir obj 2> /dev/null || true
 	$(CC) $(CFLAGS) -c $< -o $@
 
