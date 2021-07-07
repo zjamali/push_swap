@@ -15,11 +15,13 @@ SRC_NAME = main.c\
 	push_swap.c\
 	instructions.c\
 	instructions_two_stacks.c\
-	find_median.c\
 	sort_data.c\
 	sort_five_numbers.c\
 	sort_less_then_five_numbers.c\
-	ft_sort_using_sequence.c
+	ft_sort_using_sequence.c\
+	align_stacks.c\
+	find_best_item.c\
+	find_inc_sequence.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
