@@ -46,6 +46,7 @@ vectors:
 	make -C src/vector_lib
 clean:
 	rm -rf $(OBJ_DIR)/*.o
+	rm -rf $(OBJ_DIR)
 	rm -rf src/libft/*.o
 	rm -rf src/vector_lib/*.o
 
