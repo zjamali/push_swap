@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 11:09:09 by zjamali           #+#    #+#             */
-/*   Updated: 2021/07/08 17:30:43 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/07/08 17:43:27 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	main(int ac, char **av)
 	char	**data;
 
 	data = parse_arguments(av, ac);
-	if ( ft_check_data(data))
+	if (ft_check_data(data))
 	{
 		checker(data);
 	}

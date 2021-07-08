@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 16:26:53 by zjamali           #+#    #+#             */
-/*   Updated: 2021/07/08 16:10:26 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/07/08 17:45:13 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static int	ft_check_errors(char *data)
 	int	i;
 
 	i = 0;
-	if (data[0] == '-')
+	if (data[0] == '-' && data[1] != '\0')
 		i = 1;
-	if (data[0] == '+')
+	if (data[0] == '+' && data[1] != '\0')
 		i = 1;
 	while (data[i])
 	{
