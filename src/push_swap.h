@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 20:28:50 by zjamali           #+#    #+#             */
-/*   Updated: 2021/07/07 19:59:31 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/07/08 13:15:15 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ typedef struct s_is_sorted
 	int	prev_num;
 	int	curr_num;
 }				t_is_sorted;
-
+void		ft_free_data(char **data);
+char		**parse_arguments(char **av, int ac);
+int			ft_check_data_is_sorted(t_vector stack);
 int			ft_check_data(char **data);
 void		ft_check_max_and_min(char *data);
 void		ft_check_duplicated(char **data);
@@ -66,5 +68,6 @@ int			find_best(t_vector *stack_a, t_vector *stack_b);
 void		ft_sort_stack_a(t_vector *stack_a);
 void		ft_align_both_stacks(t_vector *stack_a, t_vector *stack_b,
 				int move_a, int move_b);
+void		ft_push_to_data_stack(t_vector *stack, char **data);
 
 #endif

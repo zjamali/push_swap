@@ -21,7 +21,9 @@ SRC_NAME = main.c\
 	ft_sort_using_sequence.c\
 	align_stacks.c\
 	find_best_item.c\
-	find_inc_sequence.c
+	find_inc_sequence.c\
+	parse_data.c\
+	push_data_to_stack.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
@@ -43,6 +45,17 @@ libft:
 
 vectors: 
 	make -C src/vector_lib
+
+checker: libft vectors
+	mkdir obj 2> /dev/null || true
+	$(CC) $(CFLAGS) -c src/checker.c -o obj/checker.o
+	$(CC) $(CFLAGS) -c src/parse_data.c -o obj/parse_data.o
+	$(CC) $(CFLAGS) -c src/ft_check_data.c -o obj/ft_check_data.o
+	$(CC) $(CFLAGS) -c src/ft_check_errors.c -o obj/ft_check_errors.o
+	$(CC) $(CFLAGS) -c src/push_data_to_stack.c -o obj/push_data_to_stack.o
+	$(CC) $(CFLAGS) -c src/gnl/get_next_line.c -o obj/get_next_line.o
+	$(CC) obj/parse_data.o obj/ft_check_data.o obj/ft_check_errors.o obj/checker.o obj/push_data_to_stack.o obj/get_next_line.o $(LIBFF_DIR)/libft.a $(VECTOR_DIR)/vectors.a -o $@
+
 clean:
 	rm -rf $(OBJ_DIR)/*.o
 	rm -rf $(OBJ_DIR)

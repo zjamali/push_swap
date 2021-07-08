@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 16:26:53 by zjamali           #+#    #+#             */
-/*   Updated: 2021/07/06 16:27:24 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/07/08 12:20:09 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,10 @@
 static int	ft_check_errors(char *data)
 {
 	int	i;
-	int	sign;
 
 	i = 0;
-	sign = 1;
 	if (data[0] == '-')
-	{
-		sign = -1;
 		i = 1;
-	}
 	if (data[0] == '+')
 		i = 1;
 	while (data[i])
@@ -48,4 +43,21 @@ int	ft_check_data(char **data)
 	}
 	ft_check_duplicated(data);
 	return (1);
+}
+
+int	ft_check_data_is_sorted(t_vector stack)
+{
+	int	i;
+	int	big_number;
+
+	i = 0;
+	big_number = 0;
+	while (i < stack.used)
+	{
+		if (big_number > *(int *)stack.vector_get(&stack, i))
+			return (1);
+		big_number = *(int *)stack.vector_get(&stack, i);
+		i++;
+	}
+	return (0);
 }
