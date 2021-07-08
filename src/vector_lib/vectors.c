@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 20:01:01 by zjamali           #+#    #+#             */
-/*   Updated: 2021/07/06 15:58:48 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/07/08 15:50:44 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int	ft_vector_resize(t_vector *vector, int new_capacity)
 {
 	int		status;
-	void	**items;
+	void	*items;
 
 	status = UNDEFINE;
 	if (vector)
