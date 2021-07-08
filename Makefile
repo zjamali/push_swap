@@ -53,12 +53,11 @@ checker: libft vectors
 	$(CC) $(CFLAGS) -c src/ft_check_data.c -o obj/ft_check_data.o
 	$(CC) $(CFLAGS) -c src/ft_check_errors.c -o obj/ft_check_errors.o
 	$(CC) $(CFLAGS) -c src/push_data_to_stack.c -o obj/push_data_to_stack.o
-	$(CC) $(CFLAGS) -c src/gnl/get_next_line_utils.c -o obj/get_next_line_utils.o
 	$(CC) $(CFLAGS) -c src/gnl/get_next_line.c -o obj/get_next_line.o
 	$(CC) $(CFLAGS) -c src/instructions.c -o obj/instructions.o
 	$(CC) $(CFLAGS) -c src/instructions_two_stacks.c -o obj/instructions_two_stacks.o
 	$(CC) obj/parse_data.o obj/ft_check_data.o obj/ft_check_errors.o obj/checker.o\
-	 obj/push_data_to_stack.o obj/get_next_line.o obj/get_next_line_utils.o \
+	 obj/push_data_to_stack.o obj/get_next_line.o \
 	 obj/instructions.o  obj/instructions_two_stacks.o \
 	 $(LIBFF_DIR)/libft.a $(VECTOR_DIR)/vectors.a -o $@
 
@@ -70,7 +69,6 @@ clean:
 
 fclean: clean
 	rm -rf $(NAME)
-	rm -rf checker
 	rm -rf src/libft/libft.a
 	rm -rf src/vector_lib/vectors.a
 

@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 11:09:09 by zjamali           #+#    #+#             */
-/*   Updated: 2021/07/08 17:43:27 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/07/08 19:06:33 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	ft_execute_instruction(t_vector *stack_a, t_vector *stack_b,
 		ft_reverse_rotate(stack_b);
 	else if (ft_strncmp(instruction, "rrr", ft_strlen(instruction)) == 0)
 		ft_reverse_rotate_both_stacks(stack_a, stack_b);
+	else
+		ft_display_error_and_exit();
 }
 
 void	checker(char **data)
@@ -50,19 +52,20 @@ void	checker(char **data)
 	ft_vector_init(&stack_a, sizeof(int));
 	ft_vector_init(&stack_b, sizeof(int));
 	ft_push_to_data_stack(&stack_a, data);
-	if (stack_a.used > 1 && ft_check_data_is_sorted(stack_a))
+	if (stack_a.used > 1)
 	{
-		while (get_next_line(0, &instruction) > 0)
+		while (get_next_line(&instruction))
 		{
-			ft_execute_instruction(&stack_a, &stack_b, instruction);
+			if (instruction[0] != '\0')
+				ft_execute_instruction(&stack_a, &stack_b, instruction);
 			free(instruction);
 			instruction = NULL;
 		}
+		if ((stack_b.used == 0) && (ft_check_data_is_sorted(stack_a) == 0))
+			ft_putstr_fd("OK\n", 1);
+		else
+			ft_putstr_fd("KO\n", 1);
 	}
-	if ((stack_b.used == 0) && (ft_check_data_is_sorted(stack_a) == 0))
-		ft_putstr_fd("OK\n", 1);
-	else
-		ft_putstr_fd("KO\n", 1);
 	stack_a.vector_free(&stack_a);
 	stack_a.vector_free(&stack_b);
 }

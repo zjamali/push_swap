@@ -6,12 +6,12 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 22:26:31 by zjamali           #+#    #+#             */
-/*   Updated: 2021/07/08 16:13:14 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/07/08 18:53:21 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
+/*
 static void	delete_node(t_list_line **head, int fd)
 {
 	t_list_line	*temp;
@@ -131,4 +131,87 @@ int	get_next_line(int fd, char **line)
 	}
 	free(buff);
 	return (get_line(lst, line, n, &head));
+}
+*/
+
+int	is_n(char *str)
+{
+	while (*str)
+	{
+		if (*str == '\n')
+			return (1);
+		str++;
+	}
+	return (0);
+}
+
+char	*my_strcut(char *str, int n)
+{
+	int		len;
+	int		i;
+	char	*new;
+
+	i = 0;
+	len = ft_strlen(str);
+	if (len > n)
+		len = n;
+	new = malloc(sizeof(char) * (len + 1));
+	while (*str && len--)
+		new[i++] = *str++;
+	new[i] = '\0';
+	return (new);
+}
+
+int	fill_line(char **content, char **line)
+{
+	int		end;
+	char	*tmp;
+
+	end = 0;
+	while ((*content)[end] != '\n' && (*content)[end] != '\0')
+		end++;
+	if ((*content)[end] == '\n')
+	{
+		*line = my_strcut(*content, end);
+		tmp = ft_strdup(*content + end + 1);
+		free(*content);
+		*content = tmp;
+		return (1);
+	}
+	else if ((*content[end]) == '\0')
+	{
+		*line = ft_strdup(*content);
+		free(*content);
+	}
+	if (*line[0] == '\0')
+		free(*line);
+	return (0);
+}
+
+int	get_next_line(char **line)
+{
+	int				r;
+	static char		*content;
+	char			*tmp;
+	char			*buff;
+
+	if (content == NULL)
+		content = ft_strdup("");
+	buff = malloc(sizeof(char) * 101);
+	if (!is_n(content))
+	{
+		r = 1;
+		while (r > 0)
+		{
+			buff[r] = '\0';
+			tmp = ft_strjoin(content, buff);
+			free(content);
+			content = tmp;
+			if (is_n(buff))
+				break ;
+			r = read(0, buff, 100);
+		}
+	}
+	free(buff);
+	return (fill_line(&content, line));
 }
