@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 11:09:09 by zjamali           #+#    #+#             */
-/*   Updated: 2021/07/08 16:07:59 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/07/08 17:30:43 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	checker(char **data)
 			instruction = NULL;
 		}
 	}
-	if (stack_b.used == 0 && ft_check_data_is_sorted(stack_a) == 0)
+	if ((stack_b.used == 0) && (ft_check_data_is_sorted(stack_a) == 0))
 		ft_putstr_fd("OK\n", 1);
 	else
 		ft_putstr_fd("KO\n", 1);
@@ -72,7 +72,7 @@ int	main(int ac, char **av)
 	char	**data;
 
 	data = parse_arguments(av, ac);
-	if (ft_check_data(data))
+	if ( ft_check_data(data))
 	{
 		checker(data);
 	}

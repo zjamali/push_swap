@@ -70,6 +70,7 @@ clean:
 
 fclean: clean
 	rm -rf $(NAME)
+	rm -rf checker
 	rm -rf src/libft/libft.a
 	rm -rf src/vector_lib/vectors.a
 

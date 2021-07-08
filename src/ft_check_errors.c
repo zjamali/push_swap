@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 18:08:16 by zjamali           #+#    #+#             */
-/*   Updated: 2021/07/06 16:28:24 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/07/08 17:41:09 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,7 @@ void	ft_check_duplicated(char **data)
 		j = 0;
 		while (data[j])
 		{
-			if (i != j
-				&& !ft_strncmp(data[i], data[j], ft_lenght(data[i], data[j])))
+			if (i != j && (ft_atoi(data[i]) == ft_atoi(data[j])))
 			{
 				ft_display_error_and_exit();
 			}
