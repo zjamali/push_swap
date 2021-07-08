@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zjamali <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 19:43:09 by zjamali           #+#    #+#             */
-/*   Updated: 2019/12/16 15:11:33 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/07/08 16:10:34 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t		ft_strlen(const char *s)
+size_t	ft_strlen(const char *s)
 {
-	size_t counter;
+	size_t	counter;
 
 	counter = 0;
 	while (*s != '\0')
@@ -25,13 +25,14 @@ size_t		ft_strlen(const char *s)
 	return (counter);
 }
 
-char		*ft_strdup(const char *s1)
+char	*ft_strdup(const char *s1)
 {
 	size_t	size;
 	char	*s2;
 
 	size = ft_strlen(s1);
-	if (!(s2 = (char*)malloc(sizeof(char) * (size + 1))))
+	s2 = (char *)malloc(sizeof(char) * (size + 1));
+	if (!(s2))
 		return (NULL);
 	else
 	{
@@ -46,9 +47,9 @@ char		*ft_strdup(const char *s1)
 	}
 }
 
-char		*ft_strchr(const char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!s)
@@ -56,7 +57,7 @@ char		*ft_strchr(const char *s, int c)
 	while (s[i])
 	{
 		if (s[i] == c)
-			return ((char*)s + i);
+			return ((char *)s + i);
 		i++;
 	}
 	if (c == '\0')
@@ -64,7 +65,7 @@ char		*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-char		*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*p;
 	size_t	i;
@@ -85,7 +86,7 @@ char		*ft_substr(char const *s, unsigned int start, size_t len)
 	return (p);
 }
 
-char		*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*p;
 	size_t	i;

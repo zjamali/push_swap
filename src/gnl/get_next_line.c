@@ -6,13 +6,13 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 22:26:31 by zjamali           #+#    #+#             */
-/*   Updated: 2021/07/08 15:43:58 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/07/08 16:13:14 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static void		delete_node(t_list_line **head, int fd)
+static void	delete_node(t_list_line **head, int fd)
 {
 	t_list_line	*temp;
 	t_list_line	*prev;
@@ -39,9 +39,10 @@ static void		delete_node(t_list_line **head, int fd)
 
 static t_list_line	*lstnew(int fd)
 {
-	t_list_line *lst;
+	t_list_line	*lst;
 
-	if (!(lst = (t_list_line*)malloc(sizeof(t_list_line))))
+	lst = (t_list_line *)malloc(sizeof(t_list_line));
+	if (!lst)
 		return (NULL);
 	lst->fd = fd;
 	lst->next = NULL;
@@ -75,7 +76,7 @@ static t_list_line	*check(t_list_line **lst, int fd)
 	return (ptr->next);
 }
 
-static int		get_line(t_list_line *lst, char **line, int n, t_list_line **head)
+static int	get_line(t_list_line *lst, char **line, int n, t_list_line **head)
 {
 	char	*temp;
 	int		i;
@@ -104,24 +105,21 @@ static int		get_line(t_list_line *lst, char **line, int n, t_list_line **head)
 	return (-1);
 }
 
-int				get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
-	int				n;
-	char			*buff;
+	int					n;
+	char				*buff;
 	static t_list_line	*head;
 	t_list_line			*lst;
-	char			*temp;
+	char				*temp;
 
-	
 	lst = check(&head, fd);
-	if (ft_strchr(lst->str, '\n'))
-		return (get_line(lst, line, 1, &head));
-	if (fd < 0 || fd > 4682 || (buff = (char*)malloc(BUFFER_SIZE + 1)) == NULL \
+	buff = (char *)malloc(BUFFER_SIZE + 1);
+	if (fd < 0 || fd > 4682 || buff == NULL \
 			|| read(fd, buff, 0) || line == NULL || BUFFER_SIZE < 0)
-{
 		return (-1);
-}
-	while (!ft_strchr(lst->str, '\n') && (n = read(fd, buff, BUFFER_SIZE)) > 0)
+	n = read(fd, buff, BUFFER_SIZE);
+	while (!ft_strchr(lst->str, '\n') && n > 0)
 	{
 		buff[n] = '\0';
 		temp = lst->str;
