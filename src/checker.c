@@ -6,12 +6,11 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 11:09:09 by zjamali           #+#    #+#             */
-/*   Updated: 2021/07/09 16:02:31 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/07/09 16:53:22 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "gnl/get_next_line.h"
 
 void	ft_execute_instruction(t_vector *stack_a, t_vector *stack_b,
 			char *instruction)

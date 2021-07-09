@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 20:28:50 by zjamali           #+#    #+#             */
-/*   Updated: 2021/07/08 13:15:15 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/07/09 16:53:48 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 # include "vector_lib/vectors.h"
 # include "libft/libft.h"
 # include <limits.h>
-
-# include <stdio.h>
 
 typedef struct s_median
 {
@@ -57,6 +55,7 @@ void		ft_sort_two_numbers(t_vector *stack);
 void		ft_sort_three_numbers(t_vector *stack);
 int			ft_push_median_lowests(t_vector *stack_a, t_vector *stack_b,
 				double median);
+int			get_next_line(char **line);
 void		ft_sort_stack(t_vector *stack_a, t_vector *stack_b);
 void		ft_sort_using_sequence(t_vector *stack_a, t_vector *stack_b);
 int			ft_find_min_index(t_vector *stack);
