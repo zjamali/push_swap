@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:51:49 by zjamali           #+#    #+#             */
-/*   Updated: 2021/07/07 19:54:33 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/07/09 14:55:40 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,7 @@ void	ft_align_both_stacks(t_vector *stack_a, t_vector *stack_b,
 			ft_align_stacks_using_rev_rotate(stack_a, stack_b, move_a, move_b);
 	}
 	else
-	{
 		ft_align_stacks(stack_a, stack_b, move_a, move_b);
-	}
 }
 
 void	ft_sort_stack_a(t_vector *stack_a)
