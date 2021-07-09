@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/06 16:26:53 by zjamali           #+#    #+#             */
-/*   Updated: 2021/07/08 17:45:13 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/07/09 15:51:26 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,13 @@ int	ft_check_data(char **data)
 int	ft_check_data_is_sorted(t_vector stack)
 {
 	int	i;
-	int	big_number;
 
 	i = 0;
-	big_number = 0;
-	while (i < stack.used)
+	while (i < stack.used - 1)
 	{
-		if (big_number > *(int *)stack.vector_get(&stack, i))
+		if (*(int *)stack.vector_get(&stack, i) >
+			*(int *)stack.vector_get(&stack, i + 1))
 			return (1);
-		big_number = *(int *)stack.vector_get(&stack, i);
 		i++;
 	}
 	return (0);

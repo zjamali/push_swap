@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 11:09:09 by zjamali           #+#    #+#             */
-/*   Updated: 2021/07/08 19:06:33 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/07/09 15:44:41 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,24 @@ void	checker(char **data)
 			free(instruction);
 			instruction = NULL;
 		}
+		for (int i = 0; i < stack_a.used; i++)
+		{
+			printf("[%d]=%d\n",i,*(int *)stack_a.vector_get(&stack_a,i));
+		}
+		printf("stack b\n");
+		for (int i = 0; i < stack_b.used; i++)
+		{
+			printf("[%d]=%d ",i,*(int *)stack_b.vector_get(&stack_b,i));
+		}
+		printf("\n");
 		if ((stack_b.used == 0) && (ft_check_data_is_sorted(stack_a) == 0))
 			ft_putstr_fd("OK\n", 1);
 		else
+		{
+			// if(ft_check_data_is_sorted(stack_a) == 0)
+				printf("sorted ? %d\n", ft_check_data_is_sorted(stack_a));
 			ft_putstr_fd("KO\n", 1);
+		}
 	}
 	stack_a.vector_free(&stack_a);
 	stack_a.vector_free(&stack_b);
