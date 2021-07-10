@@ -53,7 +53,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEDAERS)
 
 $(CHECKER): $(OBJ1)
 	make -C src/libft
-	make -C src/vector_lib
+	make -C src/vector_lib 
 	$(CC) $(OBJ1) $(LIBFF_DIR)/libft.a $(VECTOR_DIR)/vectors.a -o $@
 
 clean:
