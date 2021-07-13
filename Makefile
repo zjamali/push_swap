@@ -51,6 +51,8 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEDAERS)
 	@mkdir obj 2> /dev/null || true
 	$(CC) $(CFLAGS) -c $< -o $@
 
+bonus:  $(CHECKER)
+
 $(CHECKER): $(OBJ1)
 	make -C src/libft
 	make -C src/vector_lib 
