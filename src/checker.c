@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 11:09:09 by zjamali           #+#    #+#             */
-/*   Updated: 2021/07/09 16:53:22 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/07/13 18:45:06 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,13 @@ void	checker(char **data)
 	ft_vector_init(&stack_a, sizeof(int));
 	ft_vector_init(&stack_b, sizeof(int));
 	ft_push_to_data_stack(&stack_a, data);
-	if (stack_a.used > 1)
+	if (stack_a.used >= 1)
 	{
 		while (get_next_line(&instruction))
 		{
-			if (instruction[0] != '\0')
-				ft_execute_instruction(&stack_a, &stack_b, instruction);
+			if (instruction[0] == '\0')
+				ft_display_error_and_exit();
+			ft_execute_instruction(&stack_a, &stack_b, instruction);
 			free(instruction);
 			instruction = NULL;
 		}
