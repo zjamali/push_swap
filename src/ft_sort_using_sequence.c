@@ -6,7 +6,7 @@
 /*   By: zjamali <zjamali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 19:09:16 by zjamali           #+#    #+#             */
-/*   Updated: 2021/07/08 17:57:57 by zjamali          ###   ########.fr       */
+/*   Updated: 2021/07/13 17:52:40 by zjamali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	count_moves_in_stack_b(t_vector *stack, int best_index)
 	int	sign;
 
 	if (best_index == stack->used)
-		return (0);
+		return (1);
 	sign = 1;
 	if (best_index < stack->used - best_index)
 		ops = best_index;
